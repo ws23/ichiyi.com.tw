@@ -9,3 +9,4 @@
 </div>
 <!-- 頁尾區塊 end -->
 </body>
+<?php require_once('stdEnd.php'); ?>

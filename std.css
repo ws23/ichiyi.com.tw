@@ -12,6 +12,14 @@ hr {
 	color: #32D800; 
 }
 
+a:hover, a:active {
+	color: #FFFFFF; 	
+}
+
+a {
+	color: #C5FFB3; 
+	text-decoration: none;	
+}
 
 .outliner {
 	position: relative; 
@@ -77,7 +85,6 @@ hr {
 	}
 
 	.footer a {
-		text-decoration: none; 
 		color: #C5FFB3; 
 	}
 

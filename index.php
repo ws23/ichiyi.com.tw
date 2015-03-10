@@ -6,6 +6,7 @@
 	<link type="text/css" rel="stylesheet" href="index.css" />
 <?php
 	require_once('header.php'); 
+	setLog($DBmain, 'info', 'into index', ''); 
 ?>
 <!-- 首頁內容 start -->
 <div class="body">
@@ -23,12 +24,12 @@
 			<table>
 			<tr>
 				<th colspan="2">
-					<img src="img/logo.png" />
+					<a href="#"><img src="img/logo.png" /></a>
 				</th>
 			</tr>
 			<tr>
 				<td>
-					<h2>零一二三四五六七八九壹一二三四五六七八九貳一二三四</h2>
+					<h2><a href="#">零一二三四五六七八九壹一二三四五六七八九貳一二三四</a></h2>
 				</td>
 				<td rowspan="2">
 					社群功能啊哈哈
@@ -36,7 +37,7 @@
 			</tr>
 			<tr>
 				<td>
-					<p>零一二三四五六七八九壹一二三四五六七八九貳一二三四五六七八九</p>
+					<p><a href="#">零一二三四五六七八九壹一二三四五六七八九貳一二三四五六七八九</a></p>
 				</td>
 			</tr>
 			</table>
@@ -46,17 +47,17 @@
 	<?php	for($i=0; $i<2; $i++) {	?>
 				<tr>
 		<?php	for ($j=0; $j<3; $j++) {	?>
-					<th><img src="img/logo.png" /></th>
+					<th><a href="#"><img src="img/logo.png" /></a></th>
 		<?php 	}	?>
 				</tr>
 				<tr>
 		<?php	for ($j=0; $j<3; $j++) {	?>
-					<td><h2>零一二三四五六七八九壹一</h2></td>	
+					<td><h2><a href="#">零一二三四五六七八九壹一</a></h2></td>	
 		<?php	}	?>
 				</tr>
 				<tr>
 		<?php	for ($j=0; $j<3; $j++) { 	?>
-					<td><p>零一二三四五六七八九壹一二三</p></td>
+					<td><p><a href="#">零一二三四五六七八九壹一二三</a></p></td>
 		<?php	}	?>
 				</tr>
 	<?php	}	?>
@@ -69,10 +70,10 @@
 	<div class="body-recommend">
 		<h1>精彩推薦</h1>
 		<hr />
-		<img src="img/logo.png" />
-		<h2>零一二三四五六七八九壹一</h2>
+		<a href="#"><img src="img/logo.png" /></a>
+		<h2><a href="#">零一二三四五六七八九壹一</a></h2>
 		<?php for($i=0; $i<9; $i++) { ?>
-			<p>零一二三四五六七八九壹</p>
+			<p><a href="#">零一二三四五六七八九壹</a></p>
 		<?php } ?>
 	</div>
 	<!-- 精彩推薦 end -->
@@ -85,17 +86,17 @@
 	<?php for($i=0; $i<2; $i++) {	?>
 			<tr>
 	<?php	for($j=0; $j<6; $j++) {	?>
-				<th><img src="img/logo.png" /></th>	
+				<th><a href="#"><img src="img/logo.png" /></a></th>	
 	<?php	}	?>
 			</tr>
 			<tr>
 	<?php	for($j=0; $j<6; $j++) {	?>
-				<td><h2>零一二三四五六七八九壹一</h2></td>
+				<td><h2><a href="#">零一二三四五六七八九壹一</a></h2></td>
 	<?php	}	?>
 			</tr>
 			<tr>
 	<?php	for($j=0; $j<6; $j++) {	?>
-				<td><p>零一二三四五六七八九壹一二三</p></td>	
+				<td><p><a href="#">零一二三四五六七八九壹一二三</a></p></td>	
 	<?php	}	?>
 			</tr>
 	<?php	}	?>

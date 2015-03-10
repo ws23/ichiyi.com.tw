@@ -17,6 +17,42 @@ input {
 		margin: 20px;  
 }
 
+table {
+	font-size: 24px; 
+	text-align: center; 
+}
+
+tr {
+	height: 30px; 
+}
+
+th {
+	width: 200px; 
+}
+
+td {
+	font-size: 14px;
+}
+
+.add {
+	display: none;
+}
+
+.add-ini {
+	display: none; 	
+}
+
+.add-block label {
+		
+}
+
+.add-block input {
+	width: 100px;
+	height: 20px; 
+	text-align: left; 
+	margin: 10px;  
+}
+
 .radio {
 	text-align: left; 
 	width: 100px; 

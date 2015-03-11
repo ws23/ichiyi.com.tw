@@ -50,7 +50,7 @@ if ($row['text']!=NULL && $row['text']!="")
 <?php
 if($row['state']==1)
 	echo "焦點"; 
-else if($row['state']==2)
+else if($row['state']==0)
 	echo "公開"; 
 else
 	echo "隱藏"; 

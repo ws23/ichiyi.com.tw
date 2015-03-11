@@ -9,7 +9,7 @@
 		<p><a href="index.php"><img src="img/logo.png" /></a></p>
 	</div>
 	<div class="header-ad">
-		<p><img src="img/logo.png" /></p>
+		<p><img src="img/ad.jpg" /></p>
 	</div>
 	<div class="header-option">
 		<p><a href="adminLogin.php">管理登入</a></p>

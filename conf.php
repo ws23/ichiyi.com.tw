@@ -1,10 +1,10 @@
 <?php	/* Setting */
 	// Utilities
-	$ScriptPath = "/ichiyi"
+	$ScriptPath = "/ichiyi"; 
 
 	// Database Setting (MySQL)
-	$BDHost = "127.0.0.1"; 
-	$DBUser = ""; 
-	$DBPassword = ""; 
-	$DBName = ""; 
+	$DBHost = "127.0.0.1"; 
+	$DBUser = "ichiyi"; 
+	$DBPassword = "qwerty123"; 
+	$DBName = "ichiyi_main"; 
 ?>

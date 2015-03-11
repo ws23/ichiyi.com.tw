@@ -75,7 +75,10 @@ function checkblock() {
 </script>  
 
 <!-- Admin interface start -->
-<?php setLog($DBmain, 'info', 'into adminInterface', $_SESSION['USERNAME']);  ?>
+<?php 
+	setLog($DBmain, 'info', 'into adminInterface', $_SESSION['USERNAME']);  
+	require_once('updateState.php'); 
+?>
 <h2>嗨！<?php echo $_SESSION['NICKNAME']; ?>！歡迎回來！</h2>
 <hr />
 <h3>請問您想進行什麼樣的操作呢？</h3>
@@ -93,9 +96,9 @@ function checkblock() {
 <form action="adminOpt.php" method="post" enctype="multipart/form-data">
 <div class="add-block">
 	<label>上傳區塊</label>
-		<input type="checkbox" class="block" name="must" onclick="checkblock()"><label>今日必看</label></input>
-		<input type="checkbox" class="block" name="recommend" onclick="checkblock()"><label>精彩推薦</label></input>
-		<input type="checkbox" class="block" name="editor" onclick="checkblock()"><label>小編狂推</label></input<br />
+		<input type="checkbox" class="block" name="must" value="must" onclick="checkblock()"><label>今日必看</label></input>
+		<input type="checkbox" class="block" name="recommend" value="recommend" onclick="checkblock()"><label>精彩推薦</label></input>
+		<input type="checkbox" class="block" name="editor" value="editor" onclick="checkblock()"><label>小編狂推</label></input<br />
 </div>
 <div class="add-ini">
 <div class="add-focus">
@@ -144,7 +147,6 @@ function checkblock() {
 <div class="recommend">
 <?php
 	$now = date('Y-m-d H:i:s', time()); 
-	$DBmain->query("UPDATE `recommend` SET `state` = 3 WHERE `startTime` > '{$now}' OR `endTime` < '{$now}'; "); 
 	$result = $DBmain->query("SELECT * FROM `recommend` ORDER BY `startTime` DESC; "); 
 	
 	echo '<table>'; 
@@ -154,7 +156,7 @@ function checkblock() {
 		echo "<td>{$row['rID']}</td><td>{$row['startTime']}</td><td>{$row['endTime']}</td><td>{$row['text']}</td>"; 
 		if($row['state']==1)
 			echo '<td>焦點</td>'; 
-		else if($row['state']==2)
+		else if($row['state']==0)
 			echo '<td>公開</td>'; 
 		else
 			echo '<td>隱藏</td>'; 
@@ -168,7 +170,6 @@ function checkblock() {
 <div class="must">
 <?php
 	$now = date('Y-m-d H:i:s', time()); 
-	$DBmain->query("UPDATE `must` SET `state` = 3 WHERE `startTime` > '{$now}' OR `endTime` < '{$now}'; "); 
 	$result = $DBmain->query("SELECT * FROM `must` ORDER BY `startTime` DESC; "); 
 	
 	echo '<table>'; 
@@ -178,7 +179,7 @@ function checkblock() {
 		echo "<td>{$row['mID']}</td><td>{$row['startTime']}</td><td>{$row['endTime']}</td><td>{$row['titleText']}</td>"; 
 		if($row['state']==1)
 			echo '<td>焦點</td>'; 
-		else if($row['state']==2)
+		else if($row['state']==0)
 			echo '<td>公開</td>'; 
 		else
 			echo '<td>隱藏</td>'; 
@@ -192,7 +193,6 @@ function checkblock() {
 <div class="editor">
 <?php
 	$now = date('Y-m-d H:i:s', time()); 
-	$DBmain->query("UPDATE `editor` SET `state` = 3 WHERE `startTime` > '{$now}' OR `endTime` < '{$now}'; "); 
 	$result = $DBmain->query("SELECT * FROM `editor` ORDER BY `startTime` DESC; "); 
 	
 	echo '<table>'; 
@@ -200,7 +200,7 @@ function checkblock() {
 	while($row = $result->fetch_array(MYSQLI_BOTH)) {
 		echo '<tr>'; 
 		echo "<td>{$row['eID']}</td><td>{$row['startTime']}</td><td>{$row['endTime']}</td><td>{$row['titleText']}</td>"; 
-		if($row['state']==2)
+		if($row['state']<=1)
 			echo '<td>公開</td>'; 
 		else
 			echo '<td>隱藏</td>'; 

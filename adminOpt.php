@@ -31,15 +31,60 @@
 		
 		locate('adminInterface.php'); 
 	}
-	/*else if(isset()) { // manage 'must'
-		
+	if(isset($_POST['must'])) { 
+		$table = 'must'; 
+		$start = $DBmain->real_escape_string($_POST['starttime']); 
+		$end = $DBmain->real_escape_string($_POST['endtime']); 
+		$titleText = $DBmain->real_escape_string($_POST['title']); 
+		$contentText = $DBmain->real_escape_string($_POST['description']); 
+		$url = $DBmain->real_escape_string($_POST['url']); 
+		$state = $_POST['focus'] == "true"? 1 : 0;
+		$now = date('Y-m-d', time()); 
+		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+
+		move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
+			
+		$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `titleText`, `contentText`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$titleText}', '{$contentText}', '{$url}', '{$state}'); "); 
+		setLog($DBmain, 'info', 'insert new data (must)', $_SESSION['USERNAME']); 	
 	}
-	else if(isset()) {	// manage 'recommend'
-		
+	if(isset($_POST['recommend'])) {
+		$table = 'recommend'; 
+		$start = $DBmain->real_escape_string($_POST['starttime']); 
+		$end = $DBmain->real_escape_string($_POST['endtime']); 
+		$text = $DBmain->real_escape_string($_POST['description']); 
+		$url = $DBmain->real_escape_string($_POST['url']); 
+		$state = $_POST['focus'] == "true"? 1 : 0;
+		$now = date('Y-m-d', time()); 
+
+		if($_POST['focus']=="true") {
+			$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+			move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+			setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
+			$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `text`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$text}', '{$url}', '{$state}'); "); 
+		}
+		else {
+			$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `text`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$text}', '{$url}', '{$state}'); ");
+		}
+		setLog($DBmain, 'info', 'insert new data (recommend)', $_SESSION['USERNAME']); 		
 	}
-	else if(isset()) {	// manage 'editor'
-		
+	if(isset($_POST['editor'])) {
+		$table = 'editor'; 
+		$start = $DBmain->real_escape_string($_POST['starttime']); 
+		$end = $DBmain->real_escape_string($_POST['endtime']); 
+		$titleText = $DBmain->real_escape_string($_POST['title']); 
+		$contentText = $DBmain->real_escape_string($_POST['description']); 
+		$url = $DBmain->real_escape_string($_POST['url']); 
+		$state = 0;
+		$now = date('Y-m-d', time()); 
+		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+
+		move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
+			
+		$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `titleText`, `contentText`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$titleText}', '{$contentText}', '{$url}', '{$state}'); "); 
+		setLog($DBmain, 'info', 'insert new data (editor)', $_SESSION['USERNAME']); 	
 	}
-*/
 	require_once('stdEnd.php');
+	locate('adminInterface.php'); 
 ?>

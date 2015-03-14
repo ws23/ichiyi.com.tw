@@ -87,10 +87,15 @@ function checkblock() {
 	<option value="logout">登出</option>
 	<option value="change">更換密碼</option>
 	<option value="add">新增資訊</option>
+	<option value="slogan">管理「今日必看」右側連結</option>
 	<option value="must">管理「今日必看」</option>
 	<option value="recommend">管理「精彩推薦」</option>
 	<option value="editor">管理「小編狂推」</option>
 </select>
+
+<div class="slogan">
+	
+</div>
 
 <div class="add">
 <form action="adminOpt.php" method="post" enctype="multipart/form-data">

@@ -5,6 +5,16 @@
 	<title>愛奇藝股份有限公司</title>
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="admin.css" />
+	<style>
+		img {
+			width: 180px; 
+			height: 101px; 
+		}
+		img.focus {
+			width: 380px; 
+			height: 270px; 	
+		}
+	</style>
 <?php
 	require_once('header.php'); 
 	if(!isset($_SESSION['USERNAME'])){

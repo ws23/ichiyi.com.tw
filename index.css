@@ -5,6 +5,18 @@
 		margin-left: 10px; 
 	}
 
+.body-about {
+	background-color: #3C3C3C; 
+	position: relative; 
+	top: 10px; 
+	left: 0px; 
+	text-align: center; 
+}
+
+.body-about hr{
+        width: 1024px;  
+}
+        
 /* 今日必看 */
 .body-must {
 	background-color: #3C3C3C; 

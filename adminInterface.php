@@ -98,12 +98,17 @@ function checkblock() {
 </div>
 
 <div class="add">
+    <?php
+    
+$user_id=$_SESSION['USERNAME'];
+echo $user_id;
+    ?>
 <form action="adminOpt.php" method="post" enctype="multipart/form-data">
 <div class="add-block">
 	<label>上傳區塊</label>
 		<input type="checkbox" class="block" name="must" value="must" onclick="checkblock()"><label>今日必看</label></input>
 		<input type="checkbox" class="block" name="recommend" value="recommend" onclick="checkblock()"><label>精彩推薦</label></input>
-		<input type="checkbox" class="block" name="editor" value="editor" onclick="checkblock()"><label>小編狂推</label></input<br />
+		<input type="checkbox" class="block" name="editor" value="editor" onclick="checkblock()"><label>小編狂推</label></input><br />
 </div>
 <div class="add-ini">
 <div class="add-focus">

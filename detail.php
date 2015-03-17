@@ -23,7 +23,6 @@
 		locate('adminLogin.php');	
 	} 
 ?>
-
 <!-- detail start -->
 <div class="login">
 <fieldset>
@@ -41,6 +40,33 @@
 	$result = $DBmain->query("SELECT * FROM `{$class}` WHERE `{$idName}` = {$id}; "); 
 	$row = $result->fetch_array(MYSQLI_BOTH); 
 ?>
+<script>
+    var Submit=function(op_type){
+        var URLs="edit.php";
+        if(confirm({
+            msg:"Sure to "+op_type,
+  buttons: {
+    ok:'Sure',
+    cancel:'No thanks',
+    separator:'  '
+  }}
+    )){
+            $.ajax({
+                url:URLs,
+                type:"POST",
+                dataType: 'text',
+                data:{type:op_type,table:"<?php echo $class;?>",id:"<?php echo $id;?>"},
+                success: function(msg){
+                    alert(op_type+" success ");
+            window.location.href="index.php";
+                },
+                error:function(){
+                    alert(op_type+" fail");
+                }
+            });
+        }
+    }
+</script>
 <table class="detail">
 <tr><td>ID</td><td><?php echo $id; ?></td></tr>
 <tr><td>開始時間</td><td><?php echo $row['startTime']; ?></td></tr>
@@ -66,7 +92,14 @@ else
 	echo "隱藏"; 
 ?>
 </td></tr>
-<tr><td>操作</td><td>施工中！</td></tr>
+<tr>
+    <td>操作</td><td><?php
+    echo "<a onClick='Submit(\"remove\")'>移除</a>";
+    ?></td>
+    <td><?php
+    echo "<a onClick='Submit(\"edit\")'>編輯</a>";
+    ?></td>
+</tr>
 </table>
 </fieldset>
 </div>

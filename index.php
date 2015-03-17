@@ -31,7 +31,11 @@
 			<table>
 			<tr>
 				<th colspan="2">
-					<a href="<?php echo $row['URL']; ?>"><img src="<?php echo $row['imageURL']; ?>" /></a>
+                                    <?php
+                                        $href=$row['URL'];
+                                        echo '<a href='.$href.'>';
+                                        echo '<img src='.$row['imageURL'].' /></a><br/>';
+                                    ?>
 				</th>
 			</tr>
 			<tr>
@@ -39,7 +43,8 @@
 					<h2><a href="<?php echo $row['URL']; ?>"><?php echo $row['titleText']; ?></a></h2>
 				</td>
 				<td rowspan="2">
-					社群功能啊哈哈(施工中！)
+					給FB按讚~<br/>
+                                        <?php echo getFacebookLikeFormatLink($href);?>
 				</td>
 			</tr>
 			<tr>
@@ -61,17 +66,23 @@
 	<?php	for($i=0; $i<2; $i++) {	?>
 				<tr>
 		<?php	for ($j=0; $j<3; $j++) {	?>
-					<th><a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><img src="<?php echo $arr[$i*3+$j]['imageURL']; ?>" /></a></th>
+					<th>
+                                            <a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><img src="<?php echo $arr[$i*3+$j]['imageURL']; ?>" /></a>
+                                        </th>
 		<?php 	}	?>
 				</tr>
 				<tr>
 		<?php	for ($j=0; $j<3; $j++) {	?>
-					<td><h2><a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><?php echo $arr[$i*3+$j]['titleText']; ?></a></h2></td>	
+					<td>
+                                            <h2><a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><?php echo $arr[$i*3+$j]['titleText']; ?></a></h2>
+                                        </td>
 		<?php	}	?>
 				</tr>
 				<tr>
 		<?php	for ($j=0; $j<3; $j++) { 	?>
-					<td><p><a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><?php echo $arr[$i*3+$j]['contentText']; ?></a></p></td>
+					<td><p><a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><?php echo $arr[$i*3+$j]['contentText']; ?></a></p>
+                                            <?php echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");?>
+                                        </td>
 		<?php	}	?>
 				</tr>
 	<?php	}	?>
@@ -110,7 +121,7 @@
 		<table>
 		<?php
 			$result->free(); 
-			$result = $DBmain->query("SELECT * FROM `editor` ORDER BY `startTime` DESC; "); 
+			$result = $DBmain->query("SELECT * FROM `editor` ORDER BY `startTime` DESC ; "); 
 			while($row = $result->fetch_array(MYSQLI_BOTH)) {
 				$arr3[] = $row; 	
 			}
@@ -128,7 +139,9 @@
 			</tr>
 			<tr>
 	<?php	for($j=0; $j<6; $j++) {	?>
-				<td><p><a href="<?php echo $arr3[$i*6+$j]['URL']; ?>"><?php echo $arr3[$i*6+$j]['contentText']; ?></a></p></td>	
+				<td><p><a href="<?php echo $arr3[$i*6+$j]['URL']; ?>"><?php echo $arr3[$i*6+$j]['contentText']; ?></a></p>
+                                <?php echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");?>
+                                </td>	
 	<?php	}	?>
 			</tr>
 	<?php	}	?>

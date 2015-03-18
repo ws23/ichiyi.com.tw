@@ -98,11 +98,6 @@ function checkblock() {
 </div>
 
 <div class="add">
-    <?php
-    
-$user_id=$_SESSION['USERNAME'];
-echo $user_id;
-    ?>
 <form action="adminOpt.php" method="post" enctype="multipart/form-data">
 <div class="add-block">
 	<label>上傳區塊</label>

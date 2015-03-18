@@ -6,10 +6,8 @@
 <?php require_once('std.php'); ?>
 <!-- 頁首區塊 start -->
 <div id="fb-root"></div>
-<script src="jquery/jquery-1.10.2.js"></script>
-<script>
-    
 
+<script>
     (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -18,6 +16,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
+
 <div class="header">
 	<div class="header-logo">
 		<p><a href="index.php"><img src="img/logo.png" /></a></p>

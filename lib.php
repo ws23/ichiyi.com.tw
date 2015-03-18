@@ -76,9 +76,30 @@ function updateEditor($DBlink,$eID,$startTime,$endTime,$imageURL,$titleText,$con
     $DBlink->query($query);
 }
 
+//20150318
+function ajaxDataList($table){
+    switch ($table){
+        case 'must':
+            echo 'type:op_type,table:table,mID:id,state:post_state,startTime:start_date_change,endTime:end_date_change,'.
+                    'imageURL:imageURL,URL:URL,titleText:titleText,contentText:contentText';
+            break;
+        case 'recommend':
+            echo 'type:op_type,table:table,rID:id,state:post_state,startTime:start_date_change,endTime:end_date_change,'.
+                    'imageURL:imageURL,URL:URL,text:titleText';
+            break;
+        case 'editor':
+            echo 'type:op_type,table:table,eID:id,state:post_state,startTime:start_date_change,endTime:end_date_change,'.
+                    'imageURL:imageURL,URL:URL,titleText:titleText,contentText:contentText';
+            break;
+        default :
+            echo 'type:op_type,table:table,id:id,state:post_state';
+            break;
+    }
+}
+
 //20150316
 function removeArticle($DBlink,$table,$priKey){
-    $query="delete from ".$table." where ".getPriKeyFieldName($table)."=".$priKey.";";
+    $query="update ".$table." set state='2' where ".getPriKeyFieldName($table)."=".$priKey.";";
     $DBlink->query($query);
 }
 //20150316
@@ -135,7 +156,7 @@ function checkUser($DBLink,$user_id){
     if(isset($user_id)){
         $DBLink->query("select * from user where uID='".$user_id."';");
         if($DBLink->num_rows>1){
-            setLog($DBlink, $type="warning", "multiple user id : ".$user_id, $user_id);
+            setLog($DBLink, $type="warning", "multiple user id : ".$user_id, $user_id);
             return false;
         }
         return true;

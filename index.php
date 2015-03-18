@@ -5,7 +5,7 @@
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="index.css" />
 <?php
-	require_once('header.php'); 
+	require_once('header.php');
 	setLog($DBmain, 'info', 'into index', ''); 
 	$now = date('Y-m-d H:i:s', time()); 
 

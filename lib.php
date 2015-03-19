@@ -40,16 +40,17 @@ function locate($url) {
 //20150317
 function updateUser($DBlink,$uID,$userName,$password,$nickName,$email,$authority){
     $table="user";
-    $query="update ".$table." set uID='".$uID."',userName='".$userName."',password='".$password.
+    $query="update ".$table." set userName='".$userName."',password='".$password.
             "',nickName='".$nickName."',email='".$email."',authority='".$authority.
             "' where ".getPriKeyFieldName($table)."=".$uID.";";
+    echo $query;
     $DBlink->query($query);
 }
 
 //20150317 neeed to change
 function updateMust($DBlink,$mID,$startTime,$endTime,$imageURL,$titleText,$contentText,$URL,$state){
     $table="must";
-    $query="update ".$table." set mID='".$mID."',startTime='".$startTime."',endTime='".$endTime.
+    $query="update ".$table." set startTime='".$startTime."',endTime='".$endTime.
             "',imageURL='".$imageURL."',titleText='".$titleText."',contentText='".$contentText.
             "',URL='".$URL."',state='".$state.
             "' where ".getPriKeyFieldName($table)."=".$mID.";";
@@ -59,7 +60,7 @@ function updateMust($DBlink,$mID,$startTime,$endTime,$imageURL,$titleText,$conte
 //20150317 neeed to change
 function updateRecommend($DBlink,$rID,$startTime,$endTime,$imageURL,$text,$URL,$state){
     $table="recommend";
-    $query="update ".$table." set rID='".$rID."',startTime='".$startTime."',endTime='".$endTime.
+    $query="update ".$table." set startTime='".$startTime."',endTime='".$endTime.
             "',imageURL='".$imageURL."',text='".$text.
             "',URL='".$URL."',state='".$state.
             "' where ".getPriKeyFieldName($table)."=".$rID.";";
@@ -69,7 +70,7 @@ function updateRecommend($DBlink,$rID,$startTime,$endTime,$imageURL,$text,$URL,$
 //20150317 neeed to change
 function updateEditor($DBlink,$eID,$startTime,$endTime,$imageURL,$titleText,$contentText,$URL,$state){
     $table="editor";
-    $query="update ".$table." set eID='".$eID."',startTime='".$startTime."',endTime='".$endTime.
+    $query="update ".$table." set startTime='".$startTime."',endTime='".$endTime.
             "',imageURL='".$imageURL."',titleText='".$titleText."',contentText='".$contentText.
             "',URL='".$URL."',state='".$state.
             "' where ".getPriKeyFieldName($table)."=".$eID.";";
@@ -85,7 +86,7 @@ function ajaxDataList($table){
             break;
         case 'recommend':
             echo 'type:op_type,table:table,rID:id,state:post_state,startTime:start_date_change,endTime:end_date_change,'.
-                    'imageURL:imageURL,URL:URL,text:titleText';
+                    'imageURL:imageURL,URL:URL,text:text';
             break;
         case 'editor':
             echo 'type:op_type,table:table,eID:id,state:post_state,startTime:start_date_change,endTime:end_date_change,'.
@@ -97,9 +98,24 @@ function ajaxDataList($table){
     }
 }
 
+//20150319
+function getPreState($DBlink,$table,$priKey){
+    $query="select * from ".$table." where ".getPriKeyFieldName($table)."=".$priKey.";";
+    $result=$DBlink->query($query);
+    $row = $result->fetch_array(MYSQLI_BOTH);
+    $pre=$row['state'];
+    mysqli_free_result($result);
+    return $pre;
+}
+
 //20150316
 function removeArticle($DBlink,$table,$priKey){
-    $query="update ".$table." set state='2' where ".getPriKeyFieldName($table)."=".$priKey.";";
+    $pre_state=getPreState($DBlink, $table, $priKey);
+    if($pre_state<2)
+        $new_state=$pre_state+2;
+    else
+        $new_state=$pre_state;
+    $query="update ".$table." set state='".$new_state."' where ".getPriKeyFieldName($table)."=".$priKey.";";
     $DBlink->query($query);
 }
 //20150316

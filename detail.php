@@ -34,8 +34,8 @@
 <fieldset>
 <?php
 	$class = $DBmain->real_escape_string($_GET['class']); 
-	$id = $DBmain->real_escape_string($_GET['id']); 
-	
+	$id = $DBmain->real_escape_string($_GET['id']);
+        $pre=getPreState($DBmain,$class,$id);
 	if($class=='must')
 		$idName = 'mID'; 
 	else if($class=='recommend')
@@ -61,11 +61,15 @@
     if($class=='recommend')
 	echo "var text='{$row['text']}';\n";
     ?>
-    var post_state=<?php 
-            if($row['state']<2)
-                echo $row['state'];
-            else
-                echo '2';
+    var post_state=<?php
+            if($pre%2==0)
+                echo $pre==2?1:0;
+            else if($pre%2==1){
+                if($pre>2)
+                    echo '1';
+                else
+                    echo '0';
+            }
             ?>;
     $(document).ready(function() {
             $( "#starttime" ).datetimepicker({
@@ -84,7 +88,9 @@
                                 end_date_change=current_time;
                             }
                     });
+                    
             $('select#state')[0].selectedIndex= post_state;
+                
             $('select#state').change(function(){
                 post_state=$("select#state")[0].selectedIndex;
             });
@@ -96,6 +102,9 @@
             });
             $('input#text').change(function(){
                 text=$('input#text').val();
+            });
+            $('input#URL').change(function(){
+                URL=$('input#URL').val();
             });
     }); 
     
@@ -111,7 +120,8 @@
                 data:opt_data,
                 success: function(msg){
                     alert(op_type+" success "+msg);
-            window.location.href="index.php";
+                    $('div#test').text(msg);
+//            window.location.href="index.php";
                 },
                 error:function(){
                     alert(op_type+" error");
@@ -122,6 +132,7 @@
     
 </script>
 <table class="detail">
+    <div id='test'></div>
 <tr><td>ID</td><td><?php echo $id; ?></td></tr>
 <tr><td>開始時間</td><td>
         
@@ -130,7 +141,7 @@
         <input class="textbox" id="endtime" type="text" name="endtime" value="<?php echo $row['endTime']; ?>" readonly />
 <?php 
 if ($row['imageURL']!=NULL && $row['imageURL']!="") 
-	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td></tr>"; 
+	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td><td><input class='textbox' type='file' name='img' /></td></tr>"; 
         
 if ($row['titleText']!=NULL && $row['titleText']!="")
 	echo "<tr><td>標題</td><td><input id='titleText' value='{$row['titleText']}'></td></tr>"; 
@@ -141,12 +152,17 @@ if ($row['contentText']!=NULL && $row['contentText']!="")
 if ($row['text']!=NULL && $row['text']!="")
 	echo "<tr><td>描述</td><td><input id='text' value='{$row['text']}'></td></tr>";	
 ?>
-<tr><td>超連結</td><td><?php echo $row['URL']; ?></td></tr>
+<tr><td>超連結</td><td><input id='URL' value='<?php echo $row['URL']; ?>'></td></tr>
 <tr><td>狀態</td><td>
         <select id="state">
-            <option>公開</option>
-            <option>焦點</option>
-            <option>隱藏</option>
+            <?php
+                if($pre%2==0){
+                    echo '<option value="0">公開</option>';
+                }
+                else if($pre%2==1) echo '<option value="1">焦點</option>';
+            ?>
+            <?php ?>
+            <option value="2">隱藏</option>
         </select>
 </td></tr>
 <tr>

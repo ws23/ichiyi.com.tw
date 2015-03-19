@@ -48,7 +48,7 @@ $(document).ready(function() {
 			timeFormat: 'HH:mm:ss' 
 		}; 
 	$( "#starttime" ).datetimepicker(opt); 
-	$( "#endtime" ).datetimepicker(opt); 
+	$( "#endtime" ).datetimepicker(opt);
 }); 
 
 function checkblock() {
@@ -59,18 +59,41 @@ function checkblock() {
 	document.getElementsByClassName('add-focus')[0].style.display = "block"; 
 	document.getElementsByClassName('add-title')[0].style.display = "block"; 
 	document.getElementsByClassName('add-img')[0].style.display = "block"; 
-
+        
+        if ( block[0].checked && !block[1].checked && !block[2].checked ) {
+                $("input[name='title']").attr('maxlength','12');
+                $("input[name='description']").attr('maxlength','14');
+                $("p#title_limit").text("長度限制12");
+                $("p#description_limit").text("長度限制14");
+                if(focus[0].checked){
+                    $("input[name='title']").attr('maxlength','25');
+                    $("input[name='description']").attr('maxlength','30');
+                    $("p#title_limit").text("長度限制25");
+                    $("p#description_limit").text("長度限制30");
+                }
+	}
+        
 	if ( block[1].checked && !block[0].checked && !block[2].checked ) {
-		document.getElementsByClassName('add-title')[0].style.display = "none"; 	
+		document.getElementsByClassName('add-title')[0].style.display = "none";
+                $("div.add-title > input[name='title']").attr('maxlength','12');
+                $("div.add-title > input[name='description']").attr('maxlength','11');
+                $("div.add-title > p#title_limit").text("長度限制12");
+                $("div.add-title > p#description_limit").text("長度限制11");
 		if(focus[1].checked)
 			document.getElementsByClassName('add-img')[0].style.display = "none"; 
 	}
 
-	if ( block[2].checked && !block[0].checked && !block[1].checked )
+	if ( block[2].checked && !block[0].checked && !block[1].checked ){
 		document.getElementsByClassName('add-focus')[0].style.display = "none"; 
+                $("div.add-title > input[name='title']").attr('maxlength','12');
+                $("div.add-title > input[name='description']").attr('maxlength','14');
+                $("div.add-title > p#title_limit").text("長度限制12");
+                $("div.add-title > p#description_limit").text("長度限制14");
+        }
 
-	if( !block[0].checked && !block[1].checked && !block[2].checked )
+	if( !block[0].checked && !block[1].checked && !block[2].checked ){
 		document.getElementsByClassName('add-ini')[0].style.display = "none"; 
+        }
 }
 </script>  
 
@@ -117,10 +140,10 @@ function checkblock() {
 		<input class="textbox" id="endtime" type="text" name="endtime" value="<?php echo date('Y-m-d H:i:s', time()); ?>" readonly /><br />
 <div class="add-title">
 	<label>標題文字</label>
-		<input class="textbox" type="text" name="title" /><br />
+		<input class="textbox" type="text" name="title" /><p id='title_limit'></p><br />
 </div>
 	<label>描述文字</label>
-		<input class="textbox" type="text" name="description" /><br />
+		<input class="textbox" type="text" name="description" /><p id='description_limit'></p><br />
 
 	<label>網站連結</label>
 		<input class="textbox" type="text" name="url" /><br />

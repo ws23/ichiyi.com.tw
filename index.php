@@ -56,36 +56,46 @@
 		</div>
 		<div class="body-must-right">
 		<?php
-			$result->free(); 
-			$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 0 ORDER BY `startTime` DESC; "); 
+			$result->free();
+                        $row_number=2;
+                        $col_number=3;
+                        $result_limit=$row_number*$col_number;
+			$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 0 ORDER BY `startTime` DESC LIMIT ".$result_limit."; "); 
 			while($row = $result->fetch_array(MYSQLI_BOTH)) {
+                            if($row['state']<2)
 				$arr[] = $row; 
 			}
 		?>
 			<table>
-	<?php	for($i=0; $i<2; $i++) {	?>
-				<tr>
-		<?php	for ($j=0; $j<3; $j++) {	?>
-					<th>
-                                            <a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><img src="<?php echo $arr[$i*3+$j]['imageURL']; ?>" /></a>
-                                        </th>
-		<?php 	}	?>
-				</tr>
-				<tr>
-		<?php	for ($j=0; $j<3; $j++) {	?>
-					<td>
-                                            <h2><a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><?php echo $arr[$i*3+$j]['titleText']; ?></a></h2>
-                                        </td>
-		<?php	}	?>
-				</tr>
-				<tr>
-		<?php	for ($j=0; $j<3; $j++) { 	?>
-					<td><p><a href="<?php echo $arr[$i*3+$j]['URL']; ?>"><?php echo $arr[$i*3+$j]['contentText']; ?></a></p>
-                                            <?php echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");?>
-                                        </td>
-		<?php	}	?>
-				</tr>
-	<?php	}	?>
+	<?php	for($i=0; $i<2; $i++) {
+                    echo '<tr>';
+                    for($j=0;$j<3;$j++){
+                        echo '<th>';
+                        if(isset($arr[$i*3+$j]))
+                            echo "<a href='{$arr[$i*3+$j]['URL']}'><img src='{$arr[$i*3+$j]['imageURL']}' /></a>";
+                        echo '</th>';
+                    }
+                    echo '</tr>';
+                    echo '<tr>';
+                    for($j=0;$j<3;$j++){
+                        echo '<td>';
+                        if(isset($arr[$i*3+$j]))
+                            echo "<h2><a href='{$arr[$i*3+$j]['URL']}'>{$arr[$i*3+$j]['titleText']}</a></h2>";
+                        echo '</td>';
+                    }
+                    echo '</tr>';
+                    echo '<tr>';
+                    for($j=0;$j<3;$j++){
+                        echo '<td>';
+                        if(isset($arr[$i*3+$j])){
+                            echo "<p><a href='{$arr[$i*3+$j]['URL']}'>{$arr[$i*3+$j]['titleText']}</a></p>";
+                            echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");
+                        }
+                        echo '</td>';
+                    }
+                    echo '</tr>';
+                }
+                ?>
 			</table>
 		</div>
 	</div>
@@ -121,30 +131,39 @@
 		<table>
 		<?php
 			$result->free(); 
-			$result = $DBmain->query("SELECT * FROM `editor` ORDER BY `startTime` DESC ; "); 
+                        $row_number=2;
+                        $col_number=6;
+                        $result_limit=$row_number*$col_number;
+			$result = $DBmain->query("SELECT * FROM `editor` ORDER BY `startTime` DESC LIMIT ".$result_limit."; "); 
 			while($row = $result->fetch_array(MYSQLI_BOTH)) {
+                            if($row['state']<2)
 				$arr3[] = $row; 	
 			}
 		?>
-	<?php for($i=0; $i<2; $i++) {	?>
-			<tr>
-	<?php	for($j=0; $j<6; $j++) {	?>
-				<th><a href="<?php echo $arr3[$i*6+$j]['URL']; ?>"><img src="<?php echo $arr3[$i*6+$j]['imageURL']; ?>" /></a></th>	
-	<?php	}	?>
-			</tr>
-			<tr>
-	<?php	for($j=0; $j<6; $j++) {	?>
-				<td><h2><a href="<?php echo $arr3[$i*6+$j]['URL']; ?>"><?php echo $arr3[$i*6+$j]['titleText']; ?></a></h2></td>
-	<?php	}	?>
-			</tr>
-			<tr>
-	<?php	for($j=0; $j<6; $j++) {	?>
-				<td><p><a href="<?php echo $arr3[$i*6+$j]['URL']; ?>"><?php echo $arr3[$i*6+$j]['contentText']; ?></a></p>
-                                <?php echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");?>
-                                </td>	
-	<?php	}	?>
-			</tr>
-	<?php	}	?>
+	<?php
+        for($i=0; $i<2; $i++) {
+            echo '<tr>';
+            for($j=0; $j<6; $j++) {
+                if(isset($arr3[$i*6+$j]))
+                    echo "<th><a href='{$arr3[$i*6+$j]['URL']}'><img src='{$arr3[$i*6+$j]['imageURL']}' /></a></th>";
+            }
+            echo '</tr>';
+            echo '<tr>';
+            for($j=0;$j<6;$j++){
+                if(isset($arr3[$i*6+$j]))
+                    echo "<td><h2><a href='{$arr3[$i*6+$j]['URL']}'>{$arr3[$i*6+$j]['titleText']}</a></h2></td>";
+            }
+            echo '</tr>';
+            echo '<tr>';
+            for($j=0;$j<6;$j++){
+                if(isset($arr3[$i*6+$j])){
+                    echo "<td><p><a href='{$arr3[$i*6+$j]['URL']}'>{$arr3[$i*6+$j]['titleText']}</a></p>";
+                    echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");
+                    echo '</td>';
+                }
+            }
+            echo '</tr>';
+        }	?>
 		</table>	
 	</div>
 	<!-- 小編狂推 end -->

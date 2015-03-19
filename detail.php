@@ -121,7 +121,7 @@
                 success: function(msg){
                     alert(op_type+" success "+msg);
                     $('div#test').text(msg);
-//            window.location.href="index.php";
+            window.location.href="index.php";
                 },
                 error:function(){
                     alert(op_type+" error");
@@ -143,13 +143,11 @@
 if ($row['imageURL']!=NULL && $row['imageURL']!="") 
 	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td><td><input class='textbox' type='file' name='img' /></td></tr>"; 
         
-if ($row['titleText']!=NULL && $row['titleText']!="")
+if($class=='must' || $class=='editor'){
 	echo "<tr><td>標題</td><td><input id='titleText' value='{$row['titleText']}'></td></tr>"; 
-        
-if ($row['contentText']!=NULL && $row['contentText']!="")
 	echo "<tr><td>描述</td><td><input id='contentText' value='{$row['contentText']}'></td></tr>"; 
-        
-if ($row['text']!=NULL && $row['text']!="")
+}
+else if($class=='recommend')
 	echo "<tr><td>描述</td><td><input id='text' value='{$row['text']}'></td></tr>";	
 ?>
 <tr><td>超連結</td><td><input id='URL' value='<?php echo $row['URL']; ?>'></td></tr>

@@ -3,7 +3,8 @@ session_start();
 require_once 'std.php';
 $user_id=$_SESSION['USERNAME'];
 $table=$_POST['table'];
-$prikey=$_POST['id'];
+//$prikey=$_POST['id'];
+$prikey=  isset($_POST['mID'])?$_POST['mID']:isset($_POST['rID'])?$_POST['rID']:$_POST['eID'];
 
 if($_GET['type']=='add'){
     

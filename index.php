@@ -88,8 +88,8 @@
                     for($j=0;$j<3;$j++){
                         echo '<td>';
                         if(isset($arr[$i*3+$j])){
-                            echo "<p><a href='{$arr[$i*3+$j]['URL']}'>{$arr[$i*3+$j]['titleText']}</a></p>";
-                            echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");
+                            echo "<p><a href='{$arr[$i*3+$j]['URL']}'>{$arr[$i*3+$j]['contentText']}</a></p>";
+                            echo getFacebookLikeFormatLink($arr[$i*3+$j]['URL'],"button_count");
                         }
                         echo '</td>';
                     }
@@ -157,8 +157,8 @@
             echo '<tr>';
             for($j=0;$j<6;$j++){
                 if(isset($arr3[$i*6+$j])){
-                    echo "<td><p><a href='{$arr3[$i*6+$j]['URL']}'>{$arr3[$i*6+$j]['titleText']}</a></p>";
-                    echo getFacebookLikeFormatLink($arr[$i*3+$j],"button_count");
+                    echo "<td><p><a href='{$arr3[$i*6+$j]['URL']}'>{$arr3[$i*6+$j]['contentText']}</a></p>";
+                    echo getFacebookLikeFormatLink($arr[$i*3+$j]['URL'],"button_count");
                     echo '</td>';
                 }
             }

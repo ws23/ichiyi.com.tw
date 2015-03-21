@@ -22,7 +22,7 @@
 		<p><a href="index.php"><img src="img/logo.png" /></a></p>
 	</div>
 	<div class="header-ad">
-            <iframe src="yourad.php" width="728" height="90" frameborder="0" scrolling="no"></iframe>
+            <p><img src="img/ad.jpg" /></p>
 	</div>
 	<div class="header-option">
 		<p><a href="adminLogin.php">管理登入</a></p>

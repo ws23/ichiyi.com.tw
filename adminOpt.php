@@ -31,7 +31,7 @@
 		
 		locate('adminInterface.php'); 
 	}
-	if(isset($_POST['must'])) { 
+	if(isset($_POST['add-type']) && $_POST['add-type']=='must' ) { 
 		$table = 'must'; 
 		$start = $DBmain->real_escape_string($_POST['starttime']); 
 		$end = $DBmain->real_escape_string($_POST['endtime']); 
@@ -48,7 +48,7 @@
 		$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `titleText`, `contentText`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$titleText}', '{$contentText}', '{$url}', '{$state}'); "); 
 		setLog($DBmain, 'info', 'insert new data (must)', $_SESSION['USERNAME']); 	
 	}
-	if(isset($_POST['recommend'])) {
+	if(isset($_POST['add-type']) && $_POST['add-type']=='recommend' ) {
 		$table = 'recommend'; 
 		$start = $DBmain->real_escape_string($_POST['starttime']); 
 		$end = $DBmain->real_escape_string($_POST['endtime']); 
@@ -68,7 +68,7 @@
 		}
 		setLog($DBmain, 'info', 'insert new data (recommend)', $_SESSION['USERNAME']); 		
 	}
-	if(isset($_POST['editor'])) {
+	if(isset($_POST['add-type']) && $_POST['add-type']=='editor' ) {
 		$table = 'editor'; 
 		$start = $DBmain->real_escape_string($_POST['starttime']); 
 		$end = $DBmain->real_escape_string($_POST['endtime']); 
@@ -85,6 +85,15 @@
 		$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `titleText`, `contentText`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$titleText}', '{$contentText}', '{$url}', '{$state}'); "); 
 		setLog($DBmain, 'info', 'insert new data (editor)', $_SESSION['USERNAME']); 	
 	}
+        if(isset($_POST['add-type']) && $_POST['add-type']=='title'){
+                $table='title';
+                $titleText = $DBmain->real_escape_string($_POST['title']); 
+                $url = $DBmain->real_escape_string($_POST['url']); 
+                $state = 0;
+		$DBmain->query("INSERT INTO `{$table}` (`titleText`, `URL`, `state`) VALUES ('{$titleText}', '{$url}', '{$state}'); "); 
+                echo "INSERT INTO `{$table}` (`titleText`, `URL`, `state`) VALUES ('{$titleText}', '{$url}', '{$state}'); ";
+		setLog($DBmain, 'info', 'insert new data (title)', $_SESSION['USERNAME']); 	
+        }
 	require_once('stdEnd.php');
 	locate('adminInterface.php'); 
 ?>

@@ -28,6 +28,7 @@ function admin(name){
 	document.getElementsByClassName('editor')[0].style.display = "none"; 
 	document.getElementsByClassName('change')[0].style.display = "none"; 
 	document.getElementsByClassName('add')[0].style.display = "none"; 
+	document.getElementsByClassName('slogan')[0].style.display = "none"; 
 
 	if(name!=null) { 
 		var block = document.getElementsByClassName(name)[0]; 
@@ -49,7 +50,30 @@ $(document).ready(function() {
 		}; 
 	$( "#starttime" ).datetimepicker(opt); 
 	$( "#endtime" ).datetimepicker(opt);
-}); 
+});
+
+function checkEmpty(){
+    if($("input[name='title']").val()!=''&&$("input[name='description']").val()!=''&&
+            $("input[name='url']").val()!=''){
+        if($('input.block:checked').val()!='recommend')
+            return $('input[name="focus"]:checked').val()=='true'&&$('input[name="img"]').val()!='';
+        else
+            return $('input[name="img"]').val()!='';
+    }
+    var str='';
+    if($("input[name='title']").val()=='')
+        str+='標題文字 ';
+    if($("input[name='description']").val()=='')
+        str+='描述文字 ';
+    if($("input[name='url']").val()=='')
+        str+='網站連結 ';
+    if($('input[name="focus"]:checked').val()=='true'&&$('input[name="img"]').val()=='')
+        str+='圖片上傳 ';
+    if($('input.block:checked').val()=='editor'&&$('input[name="img"]').val()=='')
+        str+='圖片上傳 ';
+    alert(str+"不能是空的");
+    return false;
+}
 
 function checkblock() {
 	var block = document.getElementsByClassName('block'); 
@@ -58,18 +82,20 @@ function checkblock() {
 	document.getElementsByClassName('add-ini')[0].style.display = "block"; 
 	document.getElementsByClassName('add-focus')[0].style.display = "block"; 
 	document.getElementsByClassName('add-title')[0].style.display = "block"; 
+        document.getElementsByClassName('add-description')[0].style.display = "block"; 
 	document.getElementsByClassName('add-img')[0].style.display = "block"; 
+        document.getElementsByClassName('add-time')[0].style.display = "block";
         
         if ( block[0].checked && !block[1].checked && !block[2].checked ) {
                 $("input[name='title']").attr('maxlength','12');
                 $("input[name='description']").attr('maxlength','14');
-                $("p#title_limit").text("長度限制12");
-                $("p#description_limit").text("長度限制14");
+                $("input[name='title']").attr("placeholder","長度限制12");
+                $("input[name='description']").attr("placeholder","長度限制14");
                 if(focus[0].checked){
                     $("input[name='title']").attr('maxlength','25');
                     $("input[name='description']").attr('maxlength','30');
-                    $("p#title_limit").text("長度限制25");
-                    $("p#description_limit").text("長度限制30");
+                    $("input[name='title']").attr("placeholder","長度限制25");
+                    $("input[name='description']").attr("placeholder","長度限制30");
                 }
 	}
         
@@ -77,8 +103,8 @@ function checkblock() {
 		document.getElementsByClassName('add-title')[0].style.display = "none";
                 $("div.add-title > input[name='title']").attr('maxlength','12');
                 $("div.add-title > input[name='description']").attr('maxlength','11');
-                $("div.add-title > p#title_limit").text("長度限制12");
-                $("div.add-title > p#description_limit").text("長度限制11");
+                $("input[name='title']").attr("placeholder","長度限制12");
+                $("input[name='description']").attr("placeholder","長度限制11");
 		if(focus[1].checked)
 			document.getElementsByClassName('add-img')[0].style.display = "none"; 
 	}
@@ -87,13 +113,25 @@ function checkblock() {
 		document.getElementsByClassName('add-focus')[0].style.display = "none"; 
                 $("div.add-title > input[name='title']").attr('maxlength','12');
                 $("div.add-title > input[name='description']").attr('maxlength','14');
-                $("div.add-title > p#title_limit").text("長度限制12");
-                $("div.add-title > p#description_limit").text("長度限制14");
+                $("input[name='title']").attr("placeholder","長度限制12");
+                $("input[name='description']").attr("placeholder","長度限制14");
         }
 
-	if( !block[0].checked && !block[1].checked && !block[2].checked ){
+        if( block[3].checked){
+                document.getElementsByClassName('add-img')[0].style.display = "none"; 
+		document.getElementsByClassName('add-focus')[0].style.display = "none"; 
+		document.getElementsByClassName('add-time')[0].style.display = "none"; 
+		document.getElementsByClassName('add-description')[0].style.display = "none"; 
+                document.getElementsByClassName('add-title')[0].style.display = "block";
+                document.getElementsByClassName('add-url')[0].style.display = "block";
+                $("div.add-title > input[name='title']").attr('maxlength','6');
+                $("input[name='title']").attr("placeholder","長度限制6");
+        }
+        
+	if( !block[0].checked && !block[1].checked && !block[2].checked && !block[3].checked){
 		document.getElementsByClassName('add-ini')[0].style.display = "none"; 
         }
+        
 }
 </script>  
 
@@ -116,17 +154,14 @@ function checkblock() {
 	<option value="editor">管理「小編狂推」</option>
 </select>
 
-<div class="slogan">
-	
-</div>
-
 <div class="add">
-<form action="adminOpt.php" method="post" enctype="multipart/form-data">
+<form action="adminOpt.php" method="post" enctype="multipart/form-data" onsubmit="return checkEmpty();">
 <div class="add-block">
 	<label>上傳區塊</label>
-		<input type="checkbox" class="block" name="must" value="must" onclick="checkblock()"><label>今日必看</label></input>
-		<input type="checkbox" class="block" name="recommend" value="recommend" onclick="checkblock()"><label>精彩推薦</label></input>
-		<input type="checkbox" class="block" name="editor" value="editor" onclick="checkblock()"><label>小編狂推</label></input><br />
+		<input type="radio" class="block" name="add-type" value="must" onclick="checkblock()"><label>今日必看</label></input>
+		<input type="radio" class="block" name="add-type" value="recommend" onclick="checkblock()"><label>精彩推薦</label></input>
+		<input type="radio" class="block" name="add-type" value="editor" onclick="checkblock()"><label>小編狂推</label></input>
+		<input type="radio" class="block" name="add-type" value="title" onclick="checkblock()"><label>今日必看右側文字</label></input><br />
 </div>
 <div class="add-ini">
 <div class="add-focus">
@@ -134,19 +169,24 @@ function checkblock() {
 		<input class="radio" type="radio" name="focus" value="true" onclick="checkblock()"><label>是</label></input>
 		<input class="radio" type="radio" name="focus" value="false" onclick="checkblock()" checked><label>否</label></input><br />
 </div>
+<div class="add-time">
 	<label>發佈時間</label>
 		<input class="textbox" id="starttime" type="text" name="starttime" value="<?php echo date('Y-m-d H:i:s', time()); ?>" readonly />
 		<label> ~ </label>
-		<input class="textbox" id="endtime" type="text" name="endtime" value="<?php echo date('Y-m-d H:i:s', time()); ?>" readonly /><br />
+		<input class="textbox" id="endtime" type="text" name="endtime" value="<?php echo date('Y-m-d H:i:s', time()+60*60*24); ?>" readonly /><br />
+</div>
 <div class="add-title">
 	<label>標題文字</label>
-		<input class="textbox" type="text" name="title" /><p id='title_limit'></p><br />
+		<input class="textbox" type="text" name="title" placeholder="type something" /><br />
 </div>
+<div class="add-description">
 	<label>描述文字</label>
-		<input class="textbox" type="text" name="description" /><p id='description_limit'></p><br />
-
+		<input class="textbox" type="text" name="description" /><br />
+</div>
+<div class="add-url">
 	<label>網站連結</label>
 		<input class="textbox" type="text" name="url" /><br />
+</div>
 <div class="add-img">
 	<label>圖片上傳</label>
 		<input class="textbox" type="file" name="img" /><br />
@@ -175,7 +215,7 @@ function checkblock() {
 <div class="recommend">
 <?php
 	$now = date('Y-m-d H:i:s', time()); 
-	$result = $DBmain->query("SELECT * FROM `recommend` ORDER BY `startTime` DESC; "); 
+	$result = $DBmain->query("SELECT * FROM `recommend` where state<4 ORDER BY `startTime` DESC; "); 
 	
 	echo '<table>'; 
 	echo '<tr><th>ID</th><th>開始時間</th><th>結束時間</th><th>標題</th><th>狀態</th><th>操作</th></tr>'; 
@@ -197,8 +237,9 @@ function checkblock() {
 
 <div class="must">
 <?php
+        $result->free();
 	$now = date('Y-m-d H:i:s', time()); 
-	$result = $DBmain->query("SELECT * FROM `must` ORDER BY `startTime` DESC; "); 
+	$result = $DBmain->query("SELECT * FROM `must` where state<4 ORDER BY `startTime` DESC; "); 
 	
 	echo '<table>'; 
 	echo '<tr><th>ID</th><th>開始時間</th><th>結束時間</th><th>標題</th><th>狀態</th><th>操作</th></tr>'; 
@@ -220,8 +261,9 @@ function checkblock() {
 
 <div class="editor">
 <?php
+        $result->free();
 	$now = date('Y-m-d H:i:s', time()); 
-	$result = $DBmain->query("SELECT * FROM `editor` ORDER BY `startTime` DESC; "); 
+	$result = $DBmain->query("SELECT * FROM `editor` where state<4 ORDER BY `startTime` DESC; "); 
 	
 	echo '<table>'; 
 	echo '<tr><th>ID</th><th>開始時間</th><th>結束時間</th><th>標題</th><th>狀態</th><th>操作</th></tr>'; 
@@ -233,6 +275,28 @@ function checkblock() {
 		else
 			echo '<td>隱藏</td>'; 
 		echo "<td><a href='detail.php?class=editor&id={$row['eID']}'>編輯/刪除</a></td>"; 
+		echo '</tr>'; 
+	}
+	echo '</table>'; 
+?>
+</div>
+
+
+<div class="slogan">
+<?php
+        $result->free();
+	$result = $DBmain->query("SELECT * FROM `title` where state<4 ORDER BY `tID` DESC; "); 
+	
+	echo '<table>'; 
+	echo '<tr><th>ID</th><th>標題</th><th>狀態</th><th>操作</th></tr>'; 
+	while($row = $result->fetch_array(MYSQLI_BOTH)) {
+		echo '<tr>'; 
+		echo "<td>{$row['tID']}</td><td>{$row['titleText']}</td>"; 
+		if($row['state']<=1)
+			echo '<td>公開</td>'; 
+		else
+			echo '<td>隱藏</td>'; 
+		echo "<td><a href='detail.php?class=title&id={$row['tID']}'>編輯/刪除</a></td>"; 
 		echo '</tr>'; 
 	}
 	echo '</table>'; 

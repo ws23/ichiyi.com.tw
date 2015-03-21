@@ -15,17 +15,23 @@
 <div class="body">
 	<!-- 今日必看 start -->
 	<div class="body-must">
-			<h1>今日必看</h1>
-			<p>	<?php
-					echo "施工中"; 
-					for($i=1;$i<6;$i++)
-						echo ", 施工中";
-				?>
-			</p>
+			<h1>今日必看</h1><p><?php
+			$result = $DBmain->query("SELECT * FROM `title` WHERE state<2 order by tID DESC limit 6; "); 
+                        $i=0;
+                        while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+                            if($i>0)
+                                echo '/';
+                            echo '<a href="'.$row['URL'].'">';
+                            echo $row['titleText'];
+                            echo '</a>';
+                            $i++;
+                        }
+				?></p>
 			<hr />
 		<div class="body-must-left">
 		<?php 
-			$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 1 ORDER BY `startTime` DESC; "); 
+			$result->free();
+			$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 1 ORDER BY `startTime` DESC limit 1; "); 
 			$row = $result->fetch_array(MYSQLI_BOTH); 
 		?>
 			<table>
@@ -42,7 +48,7 @@
 				<td>
 					<h2><a href="<?php echo $row['URL']; ?>"><?php echo $row['titleText']; ?></a></h2>
 				</td>
-				<td rowspan="2">
+				<td class="emphasize-color" rowspan="2" >
 					給FB按讚~<br/>
                                         <?php echo getFacebookLikeFormatLink($href);?>
 				</td>
@@ -62,7 +68,6 @@
                         $result_limit=$row_number*$col_number;
 			$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 0 ORDER BY `startTime` DESC LIMIT ".$result_limit."; "); 
 			while($row = $result->fetch_array(MYSQLI_BOTH)) {
-                            if($row['state']<2)
 				$arr[] = $row; 
 			}
 		?>
@@ -106,21 +111,24 @@
 		<h1>精彩推薦</h1>
 		<hr />
 		<?php
+                        $i=0;
 			$result->free(); 
-			$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 1 ORDER BY `startTime` DESC; "); 
+			$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 1 ORDER BY `startTime` DESC limit 1; "); 
 			$row = $result->fetch_array(MYSQLI_BOTH);
-		?>
-		<a href="<?php echo $row['URL']; ?>"><img src="<?php echo $row['imageURL']; ?>" /></a>
-		<h2><a href="<?php echo $row['URL']; ?>"><?php echo $row['text']; ?></a></h2>
-		<?php 
+                        if(isset($row)){
+                            echo '<a href="'.$row['URL'].'"><img src="'.$row['imageURL'].'" /></a>';
+                            echo '<h2><a href="'.$row['URL'].'">'.$row['text'].'</a></h2>';
+                            $i=1;
+                        }
+                        
 			$result->free(); 
-			$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 0 ORDER BY `startTime` DESC; "); 
+			$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 0 ORDER BY `startTime` DESC limit 9; "); 
 			while($row = $result->fetch_array(MYSQLI_BOTH)) {
 				$arr2[] = $row; 
 			}
-			for($i=0; $i<9; $i++) { ?>
-			<p><a href="<?php echo $arr2[$i]['URL']; ?>"><?php echo $arr2[$i]['text']; ?></a></p>
-		<?php } ?>
+			for(; $i<9; $i++) { if (isset($arr2[$i]['URL'])||isset($arr2[$i]['text'])){?>
+			<p><a href="<?php echo $arr2[$i]['URL']; ?>"><?php $n=$i+1; echo $n.". ".$arr2[$i]['text']; ?></a></p>
+                        <?php }} ?>
 	</div>
 	<!-- 精彩推薦 end -->
 
@@ -134,10 +142,10 @@
                         $row_number=2;
                         $col_number=6;
                         $result_limit=$row_number*$col_number;
-			$result = $DBmain->query("SELECT * FROM `editor` ORDER BY `startTime` DESC LIMIT ".$result_limit."; "); 
+			$result = $DBmain->query("SELECT * FROM `editor` where state<2 ORDER BY `startTime` DESC LIMIT ".$result_limit.";");
 			while($row = $result->fetch_array(MYSQLI_BOTH)) {
                             if($row['state']<2)
-				$arr3[] = $row; 	
+				$arr3[] = $row;
 			}
 		?>
 	<?php
@@ -158,7 +166,7 @@
             for($j=0;$j<6;$j++){
                 if(isset($arr3[$i*6+$j])){
                     echo "<td><p><a href='{$arr3[$i*6+$j]['URL']}'>{$arr3[$i*6+$j]['contentText']}</a></p>";
-                    echo getFacebookLikeFormatLink($arr[$i*3+$j]['URL'],"button_count");
+                    echo getFacebookLikeFormatLink($arr3[$i*6+$j]['URL'],"button_count");
                     echo '</td>';
                 }
             }

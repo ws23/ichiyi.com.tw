@@ -77,6 +77,15 @@ function updateEditor($DBlink,$eID,$startTime,$endTime,$imageURL,$titleText,$con
     $DBlink->query($query);
 }
 
+//20150320
+function updateTitle($DBlink,$tID,$titleText,$URL,$state){
+    $table="title";
+    $query="update ".$table." set titleText='".$titleText.
+            "',URL='".$URL."',state='".$state.
+            "' where ".getPriKeyFieldName($table)."=".$tID.";";
+    $DBlink->query($query);
+}
+
 //20150318
 function ajaxDataList($table){
     switch ($table){
@@ -91,6 +100,9 @@ function ajaxDataList($table){
         case 'editor':
             echo 'type:op_type,table:table,eID:id,state:post_state,startTime:start_date_change,endTime:end_date_change,'.
                     'imageURL:imageURL,URL:URL,titleText:titleText,contentText:contentText';
+            break;
+        case 'title':
+            echo 'type:op_type,table:table,tID:id,state:post_state,URL:URL,titleText:titleText';
             break;
         default :
             echo 'type:op_type,table:table,id:id,state:post_state';
@@ -115,6 +127,7 @@ function removeArticle($DBlink,$table,$priKey){
         $new_state=$pre_state+2;
     else
         $new_state=$pre_state;
+    $new_state+=4;
     $query="update ".$table." set state='".$new_state."' where ".getPriKeyFieldName($table)."=".$priKey.";";
     $DBlink->query($query);
 }
@@ -139,6 +152,9 @@ function getPriKeyFieldName($table){
         case 'user':
             $field="uID";
             break;
+        case 'title':
+            $field='tID';
+            break;
     }
     return $field;
 }
@@ -150,7 +166,7 @@ function getPriKeyFieldName($table){
 function getFacebookLikeFormatLink($href,$layout){
     $data_layout="standard";
     if(isset($layout)&&isFacebookLikeDataLayout($layout))$data_layout=$layout;
-    return '<div class="fb-like" data-href="'.$href.'" data-width="40" data-layout="'.$data_layout.'" data-action="like" data-show-faces="true" data-share="true"></div>';
+    return '<div class="fb-like" data-href="'.$href.'" data-width="40" data-layout="'.$data_layout.'" data-action="like" data-colorscheme="dark" data-show-faces="true" data-share="true" ></div>';
 }
 
 //20150316

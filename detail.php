@@ -36,25 +36,30 @@
 	$class = $DBmain->real_escape_string($_GET['class']); 
 	$id = $DBmain->real_escape_string($_GET['id']);
         $pre=getPreState($DBmain,$class,$id);
-	if($class=='must')
-		$idName = 'mID'; 
-	else if($class=='recommend')
-		$idName = 'rID'; 
-	else if($class=='editor')
-		$idName = 'eID'; 
+        $idName=getPriKeyFieldName($class);
+//	if($class=='must')
+//		$idName = 'mID'; 
+//	else if($class=='recommend')
+//		$idName = 'rID'; 
+//	else if($class=='editor')
+//		$idName = 'eID'; 
 
 	$result = $DBmain->query("SELECT * FROM `{$class}` WHERE `{$idName}` = {$id}; "); 
 	$row = $result->fetch_array(MYSQLI_BOTH); 
+        if($row['state']>3){
+    header("HTTP/1.1 301 Moved Permanently");
+    header("Location: index.php");
+            }
 ?>
 <script>
     var table="<?php echo $class;?>";
     var id="<?php echo $id;?>";
     var start_date_change='<?php echo $row['startTime'];?>';
-    var end_date_change='<?php echo $row['startTime'];?>';
+    var end_date_change='<?php echo $row['endTime'];?>';
     var imageURL='<?php echo $row['imageURL'];?>';
     var URL='<?php echo $row['URL'];?>';
-    <?php 
-    if($class=='editor'||$class=='must'){
+    <?php
+    if($class=='editor'||$class=='must'||$class=='title'){
 	echo "var titleText='{$row['titleText']}';\n";
 	echo "var contentText='{$row['contentText']}';\n";
     }
@@ -62,14 +67,7 @@
 	echo "var text='{$row['text']}';\n";
     ?>
     var post_state=<?php
-            if($pre%2==0)
-                echo $pre==2?1:0;
-            else if($pre%2==1){
-                if($pre>2)
-                    echo '1';
-                else
-                    echo '0';
-            }
+        echo $row['state']>1?1:0;
             ?>;
     $(document).ready(function() {
             $( "#starttime" ).datetimepicker({
@@ -121,7 +119,7 @@
                 success: function(msg){
                     alert(op_type+" success "+msg);
                     $('div#test').text(msg);
-            window.location.href="index.php";
+//            window.location.href="adminInterface.php";
                 },
                 error:function(){
                     alert(op_type+" error");
@@ -134,11 +132,17 @@
 <table class="detail">
     <div id='test'></div>
 <tr><td>ID</td><td><?php echo $id; ?></td></tr>
-<tr><td>開始時間</td><td>
         
-        <input class="textbox" id="starttime" type="text" name="starttime" value="<?php echo $row['startTime']; ?>" readonly />
+        <?php
+        if($class!='title')
+echo <<<END
+            
+<tr><td>開始時間</td><td>
+        <input class="textbox" id="starttime" type="text" name="starttime" value="{$row['startTime']}" readonly />
 <tr><td>結束時間</td><td>
-        <input class="textbox" id="endtime" type="text" name="endtime" value="<?php echo $row['endTime']; ?>" readonly />
+        <input class="textbox" id="endtime" type="text" name="endtime" value="{$row['endTime']}" readonly />
+END;
+        ?>
 <?php 
 if ($row['imageURL']!=NULL && $row['imageURL']!="") 
 	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td><td><input class='textbox' type='file' name='img' /></td></tr>"; 
@@ -149,6 +153,8 @@ if($class=='must' || $class=='editor'){
 }
 else if($class=='recommend')
 	echo "<tr><td>描述</td><td><input id='text' value='{$row['text']}'></td></tr>";	
+else if($class=='title')
+	echo "<tr><td>標題</td><td><input id='titleText' value='{$row['titleText']}'></td></tr>"; 
 ?>
 <tr><td>超連結</td><td><input id='URL' value='<?php echo $row['URL']; ?>'></td></tr>
 <tr><td>狀態</td><td>

@@ -118,15 +118,14 @@
                         if(isset($row)){
                             echo '<a href="'.$row['URL'].'"><img src="'.$row['imageURL'].'" /></a>';
                             echo '<h2><a href="'.$row['URL'].'">'.$row['text'].'</a></h2>';
-                            $i=1;
                         }
                         
 			$result->free(); 
-			$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 0 ORDER BY `startTime` DESC limit 9; "); 
+			$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 0 ORDER BY `startTime` DESC limit 10; "); 
 			while($row = $result->fetch_array(MYSQLI_BOTH)) {
 				$arr2[] = $row; 
 			}
-			for(; $i<9; $i++) { if (isset($arr2[$i]['URL'])||isset($arr2[$i]['text'])){?>
+			for($i=0; $i<9; $i++) { if (isset($arr2[$i]['URL'])||isset($arr2[$i]['text'])){?>
 			<p><a href="<?php echo $arr2[$i]['URL']; ?>"><?php $n=$i+1; echo $n.". ".$arr2[$i]['text']; ?></a></p>
                         <?php }} ?>
 	</div>

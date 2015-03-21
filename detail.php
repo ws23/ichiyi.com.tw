@@ -69,6 +69,8 @@
     var post_state=<?php
         echo $row['state']>1?1:0;
             ?>;
+                
+    var files;
     $(document).ready(function() {
             $( "#starttime" ).datetimepicker({
                             dateFormat: 'yy-mm-dd', 
@@ -104,8 +106,17 @@
             $('input#URL').change(function(){
                 URL=$('input#URL').val();
             });
+            $('input[type=file]').on('change', prepareUpload);
+
+            $('form#SubmitImage').on('submit', SubmitImage);
     }); 
     
+// Grab the files and set them to our variable
+function prepareUpload(event)
+{
+  files = event.target.files;
+                    $('div#test').text(event.target.files[0].val());
+}
     var Submit=function(op_type){
         var URLs="edit.php";
         
@@ -119,14 +130,43 @@
                 success: function(msg){
                     alert(op_type+" success "+msg);
                     $('div#test').text(msg);
-//            window.location.href="adminInterface.php";
+            window.location.href="adminInterface.php";
                 },
                 error:function(){
                     alert(op_type+" error");
                 }
             });
         }
-    }
+    };
+    
+    var SubmitImage=function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    var data = new FormData();
+    $.each(files, function(key, value)
+    {
+        data.append(key, value);
+    });
+    $.ajax({
+        url: 'upload.php',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        success: function(data, textStatus, jqXHR)
+        {
+            alert("Success to upload");
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+        },
+        complete: function()
+        {
+        }
+    });
+    };
     
 </script>
 <table class="detail">
@@ -144,9 +184,11 @@ echo <<<END
 END;
         ?>
 <?php 
-if ($row['imageURL']!=NULL && $row['imageURL']!="") 
-	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td><td><input class='textbox' type='file' name='img' /></td></tr>"; 
-        
+if ($row['imageURL']!=NULL && $row['imageURL']!=""){
+	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td>";
+        echo "<td><form class='SubmitImage' method='post' enctype='multipart/form-data'>";
+        echo "<input id='fileupload' type='file' name='image' /><input type='submit' /></form></td></tr>"; 
+}
 if($class=='must' || $class=='editor'){
 	echo "<tr><td>標題</td><td><input id='titleText' value='{$row['titleText']}'></td></tr>"; 
 	echo "<tr><td>描述</td><td><input id='contentText' value='{$row['contentText']}'></td></tr>"; 

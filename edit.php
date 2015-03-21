@@ -8,7 +8,7 @@ if($_GET['type']=='add'){
     
 }
 if($_POST['type']=='edit' && checkUser($DBmain,$user_id)){
-    echo 'POST';
+    
     setLog($DBmain, "info","edit data (".$table.") ".getPriKeyFieldName($table)."=".$prikey,$user_id);
     $startTime=$_POST['startTime'];
     $endTime=$_POST['endTime'];
@@ -24,9 +24,15 @@ if($_POST['type']=='edit' && checkUser($DBmain,$user_id)){
             if($pre_state%2==0)
                 $new_state=($state==0)?0:2;
     }
-    $imageURL=$_POST['imageURL'];
-//		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
     $URL=$_POST['URL'];
+    if($state%2==0){
+        $file=$_SESSION['upload_progress_'.intval($_POST['PHP_SESSION_UPLOAD_PROGRESS'])];
+		$now = date('Y-m-d', time()); 
+			$imgURL = "img/{$now}-{$file['name']}"; 
+			move_uploaded_file($file['tmp_name'], $imgURL); 
+    $imageURL=$_POST['imageURL'];
+    }
+//		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
     switch ($table) {
         case "must":
             $mID=$_POST['mID'];

@@ -53,26 +53,29 @@ $(document).ready(function() {
 });
 
 function checkEmpty(){
-    if($("input[name='title']").val()!=''&&$("input[name='description']").val()!=''&&
-            $("input[name='url']").val()!=''){
-        if($('input.block:checked').val()!='recommend')
-            return $('input[name="focus"]:checked').val()=='true'&&$('input[name="img"]').val()!='';
-        else
-            return $('input[name="img"]').val()!='';
+    if($("input[name='description']").val()!=''&&$("input[name='url']").val()!=''){
+        if($("input[name='title']").val()!=''&&$('input[name="img"]').val()!='')
+            return true;
+        else if($('input.block:checked').val()=='recommend'&&!($('input[name="focus"]:checked').val()=='true'^$('input[name="img"]').val()!=''))
+            return true;
     }
-    var str='';
-    if($("input[name='title']").val()=='')
-        str+='標題文字 ';
-    if($("input[name='description']").val()=='')
-        str+='描述文字 ';
-    if($("input[name='url']").val()=='')
-        str+='網站連結 ';
-    if($('input[name="focus"]:checked').val()=='true'&&$('input[name="img"]').val()=='')
-        str+='圖片上傳 ';
-    if($('input.block:checked').val()=='editor'&&$('input[name="img"]').val()=='')
-        str+='圖片上傳 ';
-    alert(str+"不能是空的");
-    return false;
+    else if($('input.block:checked').val()=='title'&&$("input[name='title']").val()!=''&&$("input[name='url']").val()!='')
+        return true;
+        var str='';
+        if($("input[name='title']").val()==''&&$('input.block:checked').val()!='recommend')
+            str+='標題文字 ';
+        if($("input[name='description']").val()=='')
+            str+='描述文字 ';
+        if($("input[name='url']").val()=='')
+            str+='網站連結 ';
+        if($('input.block:checked').val()=='recommend'&&$('input[name="focus"]:checked').val()=='true'&&$('input[name="img"]').val()=='')
+            str+='圖片上傳 ';
+        if($('input.block:checked').val()=='must'&&$('input[name="img"]').val()=='')
+            str+='圖片上傳 ';
+        if($('input.block:checked').val()=='editor'&&$('input[name="img"]').val()=='')
+            str+='圖片上傳 ';
+        alert(str+"不能是空的");
+        return false;
 }
 
 function checkblock() {

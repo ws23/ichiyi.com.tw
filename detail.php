@@ -106,17 +106,10 @@
             $('input#URL').change(function(){
                 URL=$('input#URL').val();
             });
-            $('input[type=file]').on('change', prepareUpload);
-
-            $('form#SubmitImage').on('submit', SubmitImage);
+            
     }); 
     
 // Grab the files and set them to our variable
-function prepareUpload(event)
-{
-  files = event.target.files;
-                    $('div#test').text(event.target.files[0].val());
-}
     var Submit=function(op_type){
         var URLs="edit.php";
         
@@ -130,7 +123,7 @@ function prepareUpload(event)
                 success: function(msg){
                     alert(op_type+" success "+msg);
                     $('div#test').text(msg);
-            window.location.href="adminInterface.php";
+//            window.location.href="adminInterface.php";
                 },
                 error:function(){
                     alert(op_type+" error");
@@ -139,42 +132,49 @@ function prepareUpload(event)
         }
     };
     
-    var SubmitImage=function(event){
-    event.stopPropagation();
-    event.preventDefault();
-    var data = new FormData();
-    $.each(files, function(key, value)
-    {
-        data.append(key, value);
-    });
-    $.ajax({
-        url: 'upload.php',
-        type: 'POST',
-        data: formData,
-        cache: false,
-        dataType: 'json',
-        processData: false,
-        contentType: false,
-        success: function(data, textStatus, jqXHR)
-        {
-            alert("Success to upload");
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-        },
-        complete: function()
-        {
-        }
-    });
+    var SubmitImage=function(){
+    
+	$("#SubmitImage").submit(function(e)
+	{
+		var formData = new FormData(this);
+                formData.append('table',table);
+                formData.append('id',id);
+		var formURL = $(this).attr("action");
+		$.ajax(
+		{
+			url : formURL,
+			type: "POST",
+			data:  formData,
+			contentType: false,
+                        processData:false,
+                        cache: false,
+			success:function(data) 
+			{
+                            alert(data);
+                            $('#test').html(data);
+//                            if(data=="success"){
+//                                alert(data+"upload success");
+//                            }
+//                            else if(data=='fail')
+//                                alert("illegal upload");
+			},
+			error: function() 
+			{
+			}
+		});
+	    e.preventDefault();	//STOP default action
+	    e.unbind();
+	});
+		
+	$("#SubmitImage").submit(); //SUBMIT FORM
     };
     
 </script>
+<div id="test"></div>
 <table class="detail">
-    <div id='test'></div>
 <tr><td>ID</td><td><?php echo $id; ?></td></tr>
-        
         <?php
-        if($class!='title')
+        if($class!='title'&&$class!='ad'&&$class!='co-branding')
 echo <<<END
             
 <tr><td>開始時間</td><td>
@@ -184,21 +184,21 @@ echo <<<END
 END;
         ?>
 <?php 
-if ($row['imageURL']!=NULL && $row['imageURL']!=""){
+if ($class!='title'||($class=='recommend'&&$row['state']%2!=0)){
 	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td>";
-        echo "<td><form class='SubmitImage' method='post' enctype='multipart/form-data'>";
-        echo "<input id='fileupload' type='file' name='image' /><input type='submit' /></form></td></tr>"; 
+        echo "<td><form id='SubmitImage' method='post' action='image.php' >";
+        echo "<input id='fileupload' type='file' name='image' value='{$row['imageURL']}'/><input type='button' onClick='SubmitImage();' value='上傳圖片' /></form></td></tr>"; 
 }
 if($class=='must' || $class=='editor'){
-	echo "<tr><td>標題</td><td><input id='titleText' value='{$row['titleText']}'></td></tr>"; 
-	echo "<tr><td>描述</td><td><input id='contentText' value='{$row['contentText']}'></td></tr>"; 
+	echo "<tr><td>標題</td><td><input id='titleText' name='titletext' value='{$row['titleText']}'></td></tr>"; 
+	echo "<tr><td>描述</td><td><input id='contentText' name='contenttext' value='{$row['contentText']}'></td></tr>"; 
 }
 else if($class=='recommend')
 	echo "<tr><td>描述</td><td><input id='text' value='{$row['text']}'></td></tr>";	
 else if($class=='title')
 	echo "<tr><td>標題</td><td><input id='titleText' value='{$row['titleText']}'></td></tr>"; 
 ?>
-<tr><td>超連結</td><td><input id='URL' value='<?php echo $row['URL']; ?>'></td></tr>
+<tr><td>超連結</td><td><input id='URL' name='url' value='<?php echo $row['URL']; ?>'></td></tr>
 <tr><td>狀態</td><td>
         <select id="state">
             <?php

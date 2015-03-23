@@ -23,6 +23,8 @@
 
 <script language="javascript">
 function admin(name){
+	document.getElementsByClassName('co-branding')[0].style.display = "none"; 
+	document.getElementsByClassName('ad')[0].style.display = "none"; 
 	document.getElementsByClassName('must')[0].style.display = "none"; 
 	document.getElementsByClassName('recommend')[0].style.display = "none"; 
 	document.getElementsByClassName('editor')[0].style.display = "none"; 
@@ -50,6 +52,62 @@ $(document).ready(function() {
 		}; 
 	$( "#starttime" ).datetimepicker(opt); 
 	$( "#endtime" ).datetimepicker(opt);
+        $("input.block").on('click',function(){
+            var block=$("input.block:checked").val();
+            $("div.add-ini").show();
+            $('div.add-focus').show();
+            $('div.add-time').show();
+            $('div.add-title').show();
+            $('div.add-description').show();
+            $('div.add-url').show();
+            $('div.add-img').show();
+            if(block=="must"){
+                $("input[name='title']").attr('maxlength','12');
+                $("input[name='description']").attr('maxlength','14');
+                $("div.add-title > input[name='url']").attr('maxlength','255');
+                $("input[name='url']").attr("placeholder","長度限制255");
+                $("input[name='title']").attr("placeholder","長度限制12");
+                $("input[name='description']").attr("placeholder","長度限制14");
+            }
+            if(block=='recommend'){
+                $("div.add-title > input[name='title']").attr('maxlength','12');
+                $("div.add-title > input[name='description']").attr('maxlength','11');
+                $("div.add-title > input[name='url']").attr('maxlength','255');
+                $("input[name='url']").attr("placeholder","長度限制255");
+                $("input[name='title']").attr("placeholder","長度限制12");
+                $("input[name='description']").attr("placeholder","長度限制11");
+                $('div.add-title').hide();
+                if($('div.add-focus:checked').val()=='false')
+                    $('div.add-img').hide();
+            }
+            if(block=='editor'){
+                $("div.add-title > input[name='title']").attr('maxlength','12');
+                $("div.add-title > input[name='description']").attr('maxlength','14');
+                $("div.add-title > input[name='url']").attr('maxlength','255');
+                $("input[name='url']").attr("placeholder","長度限制255");
+                $("input[name='title']").attr("placeholder","長度限制12");
+                $("input[name='description']").attr("placeholder","長度限制14");
+                $('div.add-focus').hide();
+            }
+            if(block=='title'){
+                $('div.add-focus').hide();
+                $('div.add-time').hide();
+                $('div.add-description').hide();
+                $('div.add-img').hide();
+                $("div.add-title > input[name='title']").attr('maxlength','11');
+                $("div.add-title > input[name='url']").attr('maxlength','255');
+                $("input[name='url']").attr("placeholder","長度限制255");
+                $("input[name='title']").attr("placeholder","長度限制11");
+            }
+            if(block=='ad'||block=='co-branding'){
+                $('div.add-focus').hide();
+                $('div.add-time').hide();
+                $('div.add-title').hide();
+                $('div.add-description').hide();
+                $("div.add-title > input[name='url']").attr('maxlength','255');
+                $("input[name='url']").attr("placeholder","長度限制255");
+            }
+        } );
 });
 
 function checkEmpty(){
@@ -61,81 +119,21 @@ function checkEmpty(){
     }
     else if($('input.block:checked').val()=='title'&&$("input[name='title']").val()!=''&&$("input[name='url']").val()!='')
         return true;
-        var str='';
-        if($("input[name='title']").val()==''&&$('input.block:checked').val()!='recommend')
-            str+='標題文字 ';
-        if($("input[name='description']").val()=='')
-            str+='描述文字 ';
-        if($("input[name='url']").val()=='')
-            str+='網站連結 ';
-        if($('input.block:checked').val()=='recommend'&&$('input[name="focus"]:checked').val()=='true'&&$('input[name="img"]').val()=='')
-            str+='圖片上傳 ';
-        if($('input.block:checked').val()=='must'&&$('input[name="img"]').val()=='')
-            str+='圖片上傳 ';
-        if($('input.block:checked').val()=='editor'&&$('input[name="img"]').val()=='')
-            str+='圖片上傳 ';
-        alert(str+"不能是空的");
-        return false;
+    var str='';
+    if($("input[name='title']").is(':visible')&&$("input[name='title']").val()=='')
+        str+='標題文字 ';
+    if($("input[name='description']").is(':visible')&&$("input[name='description']").val()=='')
+        str+='描述文字 ';
+    if($("input[name='url']").is(':visible')&&$("input[name='url']").val()=='')
+        str+='網站連結 ';
+    if($("input[name='img']").is(':visible')&&$("input[name='img']").val()=='')
+        str+='圖片上傳 ';
+    if(str=='')
+        return true;
+    alert(str+"不能是空的");
+    return false;
 }
 
-function checkblock() {
-	var block = document.getElementsByClassName('block'); 
-	var focus = document.getElementsByName('focus'); 
-
-	document.getElementsByClassName('add-ini')[0].style.display = "block"; 
-	document.getElementsByClassName('add-focus')[0].style.display = "block"; 
-	document.getElementsByClassName('add-title')[0].style.display = "block"; 
-        document.getElementsByClassName('add-description')[0].style.display = "block"; 
-	document.getElementsByClassName('add-img')[0].style.display = "block"; 
-        document.getElementsByClassName('add-time')[0].style.display = "block";
-        
-        if ( block[0].checked && !block[1].checked && !block[2].checked ) {
-                $("input[name='title']").attr('maxlength','12');
-                $("input[name='description']").attr('maxlength','14');
-                $("input[name='title']").attr("placeholder","長度限制12");
-                $("input[name='description']").attr("placeholder","長度限制14");
-                if(focus[0].checked){
-                    $("input[name='title']").attr('maxlength','25');
-                    $("input[name='description']").attr('maxlength','30');
-                    $("input[name='title']").attr("placeholder","長度限制25");
-                    $("input[name='description']").attr("placeholder","長度限制30");
-                }
-	}
-        
-	if ( block[1].checked && !block[0].checked && !block[2].checked ) {
-		document.getElementsByClassName('add-title')[0].style.display = "none";
-                $("div.add-title > input[name='title']").attr('maxlength','12');
-                $("div.add-title > input[name='description']").attr('maxlength','11');
-                $("input[name='title']").attr("placeholder","長度限制12");
-                $("input[name='description']").attr("placeholder","長度限制11");
-		if(focus[1].checked)
-			document.getElementsByClassName('add-img')[0].style.display = "none"; 
-	}
-
-	if ( block[2].checked && !block[0].checked && !block[1].checked ){
-		document.getElementsByClassName('add-focus')[0].style.display = "none"; 
-                $("div.add-title > input[name='title']").attr('maxlength','12');
-                $("div.add-title > input[name='description']").attr('maxlength','14');
-                $("input[name='title']").attr("placeholder","長度限制12");
-                $("input[name='description']").attr("placeholder","長度限制14");
-        }
-
-        if( block[3].checked){
-                document.getElementsByClassName('add-img')[0].style.display = "none"; 
-		document.getElementsByClassName('add-focus')[0].style.display = "none"; 
-		document.getElementsByClassName('add-time')[0].style.display = "none"; 
-		document.getElementsByClassName('add-description')[0].style.display = "none"; 
-                document.getElementsByClassName('add-title')[0].style.display = "block";
-                document.getElementsByClassName('add-url')[0].style.display = "block";
-                $("div.add-title > input[name='title']").attr('maxlength','6');
-                $("input[name='title']").attr("placeholder","長度限制6");
-        }
-        
-	if( !block[0].checked && !block[1].checked && !block[2].checked && !block[3].checked){
-		document.getElementsByClassName('add-ini')[0].style.display = "none"; 
-        }
-        
-}
 </script>  
 
 <!-- Admin interface start -->
@@ -155,16 +153,20 @@ function checkblock() {
 	<option value="must">管理「今日必看」</option>
 	<option value="recommend">管理「精彩推薦」</option>
 	<option value="editor">管理「小編狂推」</option>
+        <option value='ad'>管理「廣告」</option>
+        <option value='co-branding'>管理「聯名網站」</option>
 </select>
 
 <div class="add">
 <form action="adminOpt.php" method="post" enctype="multipart/form-data" onsubmit="return checkEmpty();">
 <div class="add-block">
 	<label>上傳區塊</label>
-		<input type="radio" class="block" name="add-type" value="must" onclick="checkblock()"><label>今日必看</label></input>
-		<input type="radio" class="block" name="add-type" value="recommend" onclick="checkblock()"><label>精彩推薦</label></input>
-		<input type="radio" class="block" name="add-type" value="editor" onclick="checkblock()"><label>小編狂推</label></input>
-		<input type="radio" class="block" name="add-type" value="title" onclick="checkblock()"><label>今日必看右側文字</label></input><br />
+		<input type="radio" class="block" name="add-type" value="must" ><label>今日必看</label></input>
+		<input type="radio" class="block" name="add-type" value="recommend" ><label>精彩推薦</label></input>
+		<input type="radio" class="block" name="add-type" value="editor" ><label>小編狂推</label></input>
+		<input type="radio" class="block" name="add-type" value="title" ><label>今日必看右側文字</label></input>
+		<input type="radio" class="block" name="add-type" value="ad" ><label>廣告</label></input>
+		<input type="radio" class="block" name="add-type" value="co-branding" ><label>聯名網站</label></input><br />
 </div>
 <div class="add-ini">
 <div class="add-focus">
@@ -180,7 +182,7 @@ function checkblock() {
 </div>
 <div class="add-title">
 	<label>標題文字</label>
-		<input class="textbox" type="text" name="title" placeholder="type something" /><br />
+		<input class="textbox" type="text" name="title" /><br />
 </div>
 <div class="add-description">
 	<label>描述文字</label>
@@ -300,6 +302,48 @@ function checkblock() {
 		else
 			echo '<td>隱藏</td>'; 
 		echo "<td><a href='detail.php?class=title&id={$row['tID']}'>編輯/刪除</a></td>"; 
+		echo '</tr>'; 
+	}
+	echo '</table>'; 
+?>
+</div>
+
+<div class='ad'>
+<?php
+        $result->free();
+	$result = $DBmain->query("SELECT * FROM `ad` where state<4 ORDER BY `aID` DESC; "); 
+	
+	echo '<table>'; 
+	echo '<tr><th>ID</th><th>超連結</th><th>狀態</th><th>操作</th></tr>'; 
+	while($row = $result->fetch_array(MYSQLI_BOTH)) {
+		echo '<tr>'; 
+		echo "<td>{$row['aID']}</td><td>{$row['URL']}</td>"; 
+		if($row['state']<=1)
+			echo '<td>公開</td>'; 
+		else
+			echo '<td>隱藏</td>'; 
+		echo "<td><a href='detail.php?class=ad&id={$row['aID']}'>編輯/刪除</a></td>"; 
+		echo '</tr>'; 
+	}
+	echo '</table>'; 
+?>
+</div>
+
+<div class='co-branding'>
+<?php
+        $result->free();
+	$result = $DBmain->query("SELECT * FROM `co-branding` where state<4 ORDER BY `cID` DESC; "); 
+	
+	echo '<table>'; 
+	echo '<tr><th>ID</th><th>超連結</th><th>狀態</th><th>操作</th></tr>'; 
+	while($row = $result->fetch_array(MYSQLI_BOTH)) {
+		echo '<tr>'; 
+		echo "<td>{$row['cID']}</td><td>{$row['URL']}</td>"; 
+		if($row['state']<=1)
+			echo '<td>公開</td>'; 
+		else
+			echo '<td>隱藏</td>'; 
+		echo "<td><a href='detail.php?class=co-branding&id={$row['cID']}'>編輯/刪除</a></td>"; 
 		echo '</tr>'; 
 	}
 	echo '</table>'; 

@@ -24,7 +24,7 @@ function getIP() {
 function setLog($DBlink, $type="info", $content, $user){
 	$ip = getIP(); 
 	$url = $_SERVER['REQUEST_URI']; 
-	$DBlink->query("INSERT INTO `log`(`type`, `msg`, `user`, `site`, `IP`) VALUES ('{$type}', '{$content}', '{$user}', '{$url}', '{$ip}'); "); 
+	$DBlink->query("INSERT INTO `log`(`type`, `msg`, `user`, `site`, `IP`) VALUES ('{$type}', '{$content}', '{$user}', '{$url}', '{$ip}'); ");
 }
 
 /* alert */
@@ -43,35 +43,34 @@ function updateUser($DBlink,$uID,$userName,$password,$nickName,$email,$authority
     $query="update ".$table." set userName='".$userName."',password='".$password.
             "',nickName='".$nickName."',email='".$email."',authority='".$authority.
             "' where ".getPriKeyFieldName($table)."=".$uID.";";
-    echo $query;
     $DBlink->query($query);
 }
 
 //20150317 neeed to change
-function updateMust($DBlink,$mID,$startTime,$endTime,$imageURL,$titleText,$contentText,$URL,$state){
+function updateMust($DBlink,$mID,$startTime,$endTime,$titleText,$contentText,$URL,$state){
     $table="must";
     $query="update ".$table." set startTime='".$startTime."',endTime='".$endTime.
-            "',imageURL='".$imageURL."',titleText='".$titleText."',contentText='".$contentText.
+            "',titleText='".$titleText."',contentText='".$contentText.
             "',URL='".$URL."',state='".$state.
             "' where ".getPriKeyFieldName($table)."=".$mID.";";
     $DBlink->query($query);
 }
 
 //20150317 neeed to change
-function updateRecommend($DBlink,$rID,$startTime,$endTime,$imageURL,$text,$URL,$state){
+function updateRecommend($DBlink,$rID,$startTime,$endTime,$text,$URL,$state){
     $table="recommend";
     $query="update ".$table." set startTime='".$startTime."',endTime='".$endTime.
-            "',imageURL='".$imageURL."',text='".$text.
+            "',text='".$text.
             "',URL='".$URL."',state='".$state.
             "' where ".getPriKeyFieldName($table)."=".$rID.";";
     $DBlink->query($query);
 }
 
 //20150317 neeed to change
-function updateEditor($DBlink,$eID,$startTime,$endTime,$imageURL,$titleText,$contentText,$URL,$state){
+function updateEditor($DBlink,$eID,$startTime,$endTime,$titleText,$contentText,$URL,$state){
     $table="editor";
     $query="update ".$table." set startTime='".$startTime."',endTime='".$endTime.
-            "',imageURL='".$imageURL."',titleText='".$titleText."',contentText='".$contentText.
+            "',titleText='".$titleText."',contentText='".$contentText.
             "',URL='".$URL."',state='".$state.
             "' where ".getPriKeyFieldName($table)."=".$eID.";";
     $DBlink->query($query);
@@ -84,6 +83,41 @@ function updateTitle($DBlink,$tID,$titleText,$URL,$state){
             "',URL='".$URL."',state='".$state.
             "' where ".getPriKeyFieldName($table)."=".$tID.";";
     $DBlink->query($query);
+}
+
+//20150323
+function uploadImage($DBLink,$table,$id,$imageURL){
+    $query='update '.$table." set imageURL='".$imageURL."' where ".  getPriKeyFieldName($table)."=".$id.';';
+    $DBLink->query($query);
+}
+
+//20150323
+function isAdvertisementImageSizeLegal($width,$height){
+    return $width==728&&$height==90;
+}
+
+//20150323
+function isFocusImageSizeLegal($width,$height){
+    return $width==380&&$height==270;
+}
+
+//20150323
+function isImageSizeLegal($width,$height){
+    return $width==180&&$height==101;
+}
+
+//20150323
+function updateAd($DBLink,$aID,$URL,$state){
+    $table='ad';
+    $query="update {$table} set URL='{$URL}',state={$state} where ".getPriKeyFieldName($table)."={$aID};";
+    $DBLink->query($query);
+}
+
+//20150323
+function updateCoBranding($DBLink,$cID,$URL,$state){
+    $table='co-branding';
+    $query="update `{$table}` set URL='{$URL}',state={$state} where ".getPriKeyFieldName($table)."={$cID};";
+    $DBLink->query($query);
 }
 
 //20150318
@@ -103,6 +137,9 @@ function ajaxDataList($table){
             break;
         case 'title':
             echo 'type:op_type,table:table,tID:id,state:post_state,URL:URL,titleText:titleText';
+            break;
+        case 'ad':case 'co-branding':
+            echo 'type:op_type,table:table,'.  getPriKeyFieldName($table).':id,state:post_state,URL:URL';
             break;
         default :
             echo 'type:op_type,table:table,id:id,state:post_state';
@@ -154,6 +191,12 @@ function getPriKeyFieldName($table){
             break;
         case 'title':
             $field='tID';
+            break;
+        case 'ad':
+            $field='aID';
+            break;
+        case 'co-branding':
+            $field='cID';
             break;
     }
     return $field;

@@ -94,6 +94,19 @@
                 echo "INSERT INTO `{$table}` (`titleText`, `URL`, `state`) VALUES ('{$titleText}', '{$url}', '{$state}'); ";
 		setLog($DBmain, 'info', 'insert new data (title)', $_SESSION['USERNAME']); 	
         }
+        if(isset($_POST['add-type'])&&($_POST['add-type']=='ad'||$_POST['add-type']=='co-branding')){
+            $table=$_POST['add-type'];
+                $url = $DBmain->real_escape_string($_POST['url']); 
+                $state = 0;
+		$now = date('Y-m-d', time()); 
+		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+
+		move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
+		$DBmain->query("INSERT INTO `{$table}` (`imageURL`, `URL`, `state`) VALUES ('{$imgURL}', '{$url}', '{$state}'); "); 
+                echo "INSERT INTO `{$table}` (`imageURL`, `URL`, `state`) VALUES ('{$imgURL}', '{$url}', '{$state}'); ";
+		setLog($DBmain, 'info', "insert new data ({$table})", $_SESSION['USERNAME']); 	
+        }
 	require_once('stdEnd.php');
 	locate('adminInterface.php'); 
 ?>

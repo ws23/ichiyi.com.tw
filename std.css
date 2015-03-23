@@ -54,12 +54,13 @@ a {
 
 	.header-ad img {
 		width: 728px; 
-		height: 90px; 	
+		height: 90px;
 	}
 
 .header-option {
 	position: absolute; 
-	top: 10px; 
+	/*top: 10px;*/
+        top:0px;
 	left: 1080px; 
 	width: 200px; 
 }
@@ -71,6 +72,11 @@ a {
 		text-decoration: none; 
 		color: #C5FFB3; 	
 	}
+        
+        .header-option img {
+                width: 90px;
+                height: 90px;
+        }
 
 /* footer */
 .footer {

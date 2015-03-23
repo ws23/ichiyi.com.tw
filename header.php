@@ -21,12 +21,21 @@
 	<div class="header-logo">
 		<p><a href="index.php"><img src="img/logo.png" /></a></p>
 	</div>
-	<div class="header-ad">
-            <p><img src="img/ad.jpg" /></p>
+	<div class="header-ad"><?php
+            $query='select * from ad where state<2 order by aID desc limit 1;';
+            $result=$DBmain->query($query);
+            $row=$result->fetch_array(MYSQLI_BOTH);
+            echo "<p><a href='{$row['URL']}'><img src='{$row['imageURL']}' /></a></p>";
+        ?>
 	</div>
-	<div class="header-option">
-		<p><a href="adminLogin.php">管理登入</a></p>
-		<p><a href="#">加入粉絲頁<br />掌握潮消息</a></p>
+	<div class="header-option"><?php
+            $result->free();
+            $query='select * from `co-branding` where state<2 order by cID desc limit 1;';
+            $result=$DBmain->query($query);
+            $row=$result->fetch_array(MYSQLI_BOTH);
+            echo "<p><a href='{$row['URL']}'><img src='{$row['imageURL']}' /></a></p>";
+            $result->free();
+        ?>
 	</div>
 </div>
 <!-- 頁首區塊 end -->

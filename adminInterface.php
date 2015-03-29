@@ -22,6 +22,10 @@
 ?>
 
 <script language="javascript">
+var pre_block="must";
+var pre_focus="false";
+var image_width=180;
+var image_height=101;
 function admin(name){
 	document.getElementsByClassName('co-branding')[0].style.display = "none"; 
 	document.getElementsByClassName('ad')[0].style.display = "none"; 
@@ -52,62 +56,56 @@ $(document).ready(function() {
 		}; 
 	$( "#starttime" ).datetimepicker(opt); 
 	$( "#endtime" ).datetimepicker(opt);
+        $("input.radio").on('click',function(){
+                if($("input.block:checked").val()=='must'){
+                    MustFocus($('input.radio:checked').val()=='true');
+                }
+                else if($("input.block:checked").val()=='recommend'){
+                    RecommendFocus($('input.radio:checked').val()=='true');
+                }
+        });
         $("input.block").on('click',function(){
             var block=$("input.block:checked").val();
             $("div.add-ini").show();
-            $('div.add-focus').show();
-            $('div.add-time').show();
-            $('div.add-title').show();
-            $('div.add-description').show();
-            $('div.add-url').show();
-            $('div.add-img').show();
+            pre_focus=$('input.radio[name="focus"]:checked').val();
+            pre_block=block;
+            image_width=180;
+            image_height=101;
+            $("input[name='description']").val('');
+            $("input[name='title']").val('');
+            $("input[name='url']").val('');
+            $("input[name='img']").val('');
             if(block=="must"){
-                $("input[name='title']").attr('maxlength','12');
-                $("input[name='description']").attr('maxlength','14');
-                $("div.add-title > input[name='url']").attr('maxlength','255');
-                $("input[name='url']").attr("placeholder","長度限制255");
-                $("input[name='title']").attr("placeholder","長度限制12");
-                $("input[name='description']").attr("placeholder","長度限制14");
+                MustFocus(pre_focus=='true');
             }
             if(block=='recommend'){
-                $("div.add-title > input[name='title']").attr('maxlength','12');
-                $("div.add-title > input[name='description']").attr('maxlength','11');
-                $("div.add-title > input[name='url']").attr('maxlength','255');
-                $("input[name='url']").attr("placeholder","長度限制255");
-                $("input[name='title']").attr("placeholder","長度限制12");
-                $("input[name='description']").attr("placeholder","長度限制11");
-                $('div.add-title').hide();
-                if($('div.add-focus:checked').val()=='false')
-                    $('div.add-img').hide();
+                RecommendFocus(pre_focus=='true');
             }
             if(block=='editor'){
-                $("div.add-title > input[name='title']").attr('maxlength','12');
-                $("div.add-title > input[name='description']").attr('maxlength','14');
-                $("div.add-title > input[name='url']").attr('maxlength','255');
-                $("input[name='url']").attr("placeholder","長度限制255");
-                $("input[name='title']").attr("placeholder","長度限制12");
-                $("input[name='description']").attr("placeholder","長度限制14");
-                $('div.add-focus').hide();
+                Editor();
             }
             if(block=='title'){
-                $('div.add-focus').hide();
-                $('div.add-time').hide();
-                $('div.add-description').hide();
-                $('div.add-img').hide();
-                $("div.add-title > input[name='title']").attr('maxlength','11');
-                $("div.add-title > input[name='url']").attr('maxlength','255');
-                $("input[name='url']").attr("placeholder","長度限制255");
-                $("input[name='title']").attr("placeholder","長度限制11");
+                Title();
             }
             if(block=='ad'||block=='co-branding'){
-                $('div.add-focus').hide();
-                $('div.add-time').hide();
-                $('div.add-title').hide();
-                $('div.add-description').hide();
-                $("div.add-title > input[name='url']").attr('maxlength','255');
-                $("input[name='url']").attr("placeholder","長度限制255");
+                if(block=='ad'){
+                    Ad();
+                }
+                else{
+                    CoBranding();
+                }
             }
         } );
+        
+            $("input[name='img']").change(function (e) {
+            var F = this.files;
+            readImage(F[0]);
+            });
+            $('#Rest').on('click',function(){
+                $("input.block[value='"+pre_block+"']").attr("checked",true);
+                $("input.radio[value='"+pre_focus+"']").attr("checked",true);
+                $("#Submit").attr('disabled', false);
+            });
 });
 
 function checkEmpty(){
@@ -132,6 +130,123 @@ function checkEmpty(){
         return true;
     alert(str+"不能是空的");
     return false;
+}
+
+function readImage(file) {
+
+    var reader = new FileReader();
+    var image  = new Image();
+
+    reader.readAsDataURL(file);  
+    reader.onload = function(_file) {
+        image.src    = _file.target.result;              // url.createObjectURL(file);
+        image.onload = function() {
+            var w = this.width,
+                h = this.height;
+            if(w!=image_width||h!=image_height){
+                alert("圖片尺寸應為 "+image_width+" * "+image_height);
+                $("#Submit").attr('disabled', true);
+            }
+            else
+                $("#Submit").attr('disabled', false);
+        };
+        image.onerror= function() {
+            alert('Invalid file type: '+ file.type);
+        };      
+    };
+
+}
+
+function AllBlock(){
+    $('div.add-focus').show();
+    $('div.add-time').show();
+    $('div.add-title').show();
+    $('div.add-description').show();
+    $('div.add-url').show();
+    $('div.add-img').show();
+}
+
+function RecommendFocus(b){
+    AllBlock();
+    image_width=180;
+    image_height=101;
+    $("input[name='description']").attr('maxlength',11);
+    $("input[name='url']").attr('maxlength',255);
+    $("input[name='url']").attr("placeholder","長度限制255");
+    $("input[name='description']").attr("placeholder","長度限制11");
+    $('div.add-title').hide();
+    if(!b){
+        $('div.add-img').hide();
+    }
+}
+
+function MustFocus(b){
+    AllBlock();
+    var title_limit=25;
+    var description_limit=30;
+    image_width=380;
+    image_height=270;
+    if(!b){
+        image_width=180;
+        image_height=101;
+        title_limit=12;
+        description_limit=14;
+    }
+    $("input[name='title']").attr('maxlength',title_limit);
+    $("input[name='description']").attr('maxlength',description_limit);
+    $("input[name='url']").attr('maxlength',255);
+    $("input[name='url']").attr("placeholder","長度限制255");
+    $("input[name='title']").attr("placeholder","長度限制"+title_limit);
+    $("input[name='description']").attr("placeholder","長度限制"+description_limit);
+}
+
+function Editor(){
+    AllBlock();
+    image_width=180;
+    image_height=101;
+    $("input[name='title']").attr('maxlength','12');
+    $("input[name='description']").attr('maxlength','14');
+    $("input[name='url']").attr('maxlength','255');
+    $("input[name='url']").attr("placeholder","長度限制255");
+    $("input[name='title']").attr("placeholder","長度限制12");
+    $("input[name='description']").attr("placeholder","長度限制14");
+    $('div.add-focus').hide();
+}
+
+function Title(){
+    AllBlock();
+    $('div.add-focus').hide();
+    $('div.add-time').hide();
+    $('div.add-description').hide();
+    $('div.add-img').hide();
+    $("input[name='title']").attr('maxlength','11');
+    $("input[name='url']").attr('maxlength','255');
+    $("input[name='url']").attr("placeholder","長度限制255");
+    $("input[name='title']").attr("placeholder","長度限制11");
+}
+
+function Ad(){
+    AllBlock();
+    image_width=728;
+    image_height=90;
+    $('div.add-focus').hide();
+    $('div.add-time').hide();
+    $('div.add-title').hide();
+    $('div.add-description').hide();
+    $("input[name='url']").attr('maxlength','255');
+    $("input[name='url']").attr("placeholder","長度限制255");
+}
+
+function CoBranding(){
+    AllBlock();
+    image_width=90;
+    image_height=90;
+    $('div.add-focus').hide();
+    $('div.add-time').hide();
+    $('div.add-title').hide();
+    $('div.add-description').hide();
+    $("input[name='url']").attr('maxlength','255');
+    $("input[name='url']").attr("placeholder","長度限制255");
 }
 
 </script>  
@@ -196,8 +311,8 @@ function checkEmpty(){
 	<label>圖片上傳</label>
 		<input class="textbox" type="file" name="img" /><br />
 </div>
-	<input type="submit" value="submit" />
-		<input type="reset" value="reset" />
+	<input id="Submit" type="submit" value="submit" />
+		<input id='Rest' type="reset" value="reset" />
 </div>
 </form> 
 </div>

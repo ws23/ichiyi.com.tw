@@ -57,6 +57,8 @@
     var start_date_change='<?php echo $row['startTime'];?>';
     var end_date_change='<?php echo $row['endTime'];?>';
     var imageURL='<?php echo $row['imageURL'];?>';
+    var image_width="<?php echo getImageWidth($class,$pre);?>";
+    var image_height="<?php echo getImageHeight($class,$pre);?>";
     var URL='<?php echo $row['URL'];?>';
     <?php
     if($class=='editor'||$class=='must'||$class=='title'){
@@ -107,6 +109,11 @@
                 URL=$('input#URL').val();
             });
             
+            $("#fileupload").change(function (e) {
+            var F = this.files;
+            readImage(F[0]);
+            });
+            
     }); 
     
 // Grab the files and set them to our variable
@@ -123,7 +130,7 @@
                 success: function(msg){
                     alert(op_type+" success "+msg);
                     $('div#test').text(msg);
-//            window.location.href="adminInterface.php";
+            window.location.href="adminInterface.php";
                 },
                 error:function(){
                     alert(op_type+" error");
@@ -151,12 +158,6 @@
 			success:function(data) 
 			{
                             alert(data);
-                            $('#test').html(data);
-//                            if(data=="success"){
-//                                alert(data+"upload success");
-//                            }
-//                            else if(data=='fail')
-//                                alert("illegal upload");
 			},
 			error: function() 
 			{
@@ -168,6 +169,31 @@
 		
 	$("#SubmitImage").submit(); //SUBMIT FORM
     };
+    
+    function readImage(file) {
+
+        var reader = new FileReader();
+        var image  = new Image();
+
+        reader.readAsDataURL(file);  
+        reader.onload = function(_file) {
+            image.src    = _file.target.result;              // url.createObjectURL(file);
+            image.onload = function() {
+                var w = this.width,
+                    h = this.height;
+                if(w!=image_width||h!=image_height){
+                    alert("圖片尺寸應為 "+image_width+" * "+image_height);
+                    $("#SubmitImageButton").attr('disabled', true);
+                }
+                else
+                    $("#SubmitImageButton").attr('disabled', false);
+            };
+            image.onerror= function() {
+                alert('Invalid file type: '+ file.type);
+            };      
+        };
+
+    }
     
 </script>
 <div id="test"></div>
@@ -187,7 +213,7 @@ END;
 if ($class!='title'||($class=='recommend'&&$row['state']%2!=0)){
 	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td>";
         echo "<td><form id='SubmitImage' method='post' action='image.php' >";
-        echo "<input id='fileupload' type='file' name='image' value='{$row['imageURL']}'/><input type='button' onClick='SubmitImage();' value='上傳圖片' /></form></td></tr>"; 
+        echo "<input id='fileupload' type='file' name='image' value='{$row['imageURL']}'/><input id='SubmitImageButton' type='button' onClick='SubmitImage();' value='上傳圖片' /></form></td></tr>"; 
 }
 if($class=='must' || $class=='editor'){
 	echo "<tr><td>標題</td><td><input id='titleText' name='titletext' value='{$row['titleText']}'></td></tr>"; 
@@ -212,8 +238,8 @@ else if($class=='title')
         </select>
 </td></tr>
 <tr>
-    <td>操作</td><td><a class="operator" onClick='Submit("remove")'>移除</a></td>
-    <td><a class="operator" onClick='Submit("edit")'>編輯</a></td>
+    <td>操作</td><td><input type="button" class="operator" onClick='Submit("remove")' value="移除"></td>
+    <td><input type="button" class="operator" onClick='Submit("edit")' value="編輯"></td>
 </tr>
 </table>
 </fieldset>

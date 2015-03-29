@@ -107,6 +107,72 @@ function isImageSizeLegal($width,$height){
 }
 
 //20150323
+function isAdSizeLegal($width,$height){
+    return $width==728&&$height==90;
+}
+
+//20150323
+function isCoBrandingSizeLegal($width,$height){
+    return $width==90&&$height==90;
+}
+
+//20150324
+function getImageWidth($table,$state){
+    $width="";
+    switch ($table) {
+        case 'must':
+            $width=180;
+            if($state%2==1)
+                $width=380;
+            break;
+        case 'recommend':
+            if($state)
+                $width=180;
+            break;
+        case 'editor':
+            $width=180;
+            break;
+        case 'ad':
+            $width=728;
+            break;
+        case 'co-branding':
+            $width=90;
+            break;
+        default:
+            break;
+    }
+    return $width;
+}
+
+//20150324
+function getImageHeight($table,$state){
+    $height="";
+    switch ($table) {
+        case 'must':
+            $height=101;
+            if($state%2==1)
+                $height=270;
+            break;
+        case 'recommend':
+            if($state%2==1)
+                $height=101;
+            break;
+        case 'editor':
+            $height=101;
+            break;
+        case 'ad':
+            $height=90;
+            break;
+        case 'co-branding':
+            $height=90;
+            break;
+        default:
+            break;
+    }
+    return $height;
+}
+
+//20150323
 function updateAd($DBLink,$aID,$URL,$state){
     $table='ad';
     $query="update {$table} set URL='{$URL}',state={$state} where ".getPriKeyFieldName($table)."={$aID};";

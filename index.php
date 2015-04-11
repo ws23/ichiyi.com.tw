@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>愛奇藝股份有限公司</title>
+	<title>愛奇藝台灣官網</title>
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="index.css" />
 <?php
@@ -49,7 +49,7 @@
 					<h2><a href="<?php echo $row['URL']; ?>"><?php echo $row['titleText']; ?></a></h2>
 				</td>
 				<td class="emphasize-color" rowspan="2" >
-					給FB按讚~<br/>
+					
                                         <?php echo getFacebookLikeFormatLink($href);?>
 				</td>
 			</tr>

@@ -1,4 +1,6 @@
 <?php
+	ini_set('display_errors', 'Off'); 
+
 	require_once('lib.php');
 	require_once('conf.php'); 
         
@@ -15,5 +17,7 @@
 	$DBmain->query('SET character_set_connection = "utf8"; '); 
 	$DBmain->query('SET character_set_database = "utf8"; '); 
 	$DBmain->query('SET character_set_server = "utf8"; '); 
+	
+	
 
 ?> 

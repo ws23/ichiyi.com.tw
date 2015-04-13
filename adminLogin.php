@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>臺灣愛奇藝官方網站</title>
+	<title>愛奇藝臺灣官方網站</title>
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="admin.css" />
 <?php

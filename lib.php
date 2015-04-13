@@ -87,7 +87,7 @@ function updateTitle($DBlink,$tID,$titleText,$URL,$state){
 
 //20150323
 function uploadImage($DBLink,$table,$id,$imageURL){
-    $query='update '.$table." set imageURL='".$imageURL."' where ".  getPriKeyFieldName($table)."=".$id.';';
+    $query="update `".$table."` set imageURL='".$imageURL."' where ".  getPriKeyFieldName($table)."=".$id.';';
     $DBLink->query($query);
 }
 
@@ -215,7 +215,7 @@ function ajaxDataList($table){
 
 //20150319
 function getPreState($DBlink,$table,$priKey){
-    $query="select * from ".$table." where ".getPriKeyFieldName($table)."=".$priKey.";";
+    $query="select * from `".$table."` where ".getPriKeyFieldName($table)."=".$priKey.";";
     $result=$DBlink->query($query);
     $row = $result->fetch_array(MYSQLI_BOTH);
     $pre=$row['state'];
@@ -231,7 +231,7 @@ function removeArticle($DBlink,$table,$priKey){
     else
         $new_state=$pre_state;
     $new_state+=4;
-    $query="update ".$table." set state='".$new_state."' where ".getPriKeyFieldName($table)."=".$priKey.";";
+    $query="update `".$table."` set state='".$new_state."' where ".getPriKeyFieldName($table)."=".$priKey.";";
     $DBlink->query($query);
 }
 //20150316

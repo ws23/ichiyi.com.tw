@@ -3,8 +3,8 @@
 	<hr />
 	<p>
 		<a href="index.php">愛奇藝</a>|
-		<a href="#">臉書粉絲頁</a>|
-		<a href="about.php">關於我們</a>
+		<a href="https://www.facebook.com/pps.iqiyi" target="_blank">臉書粉絲頁</a>|
+		<a href="mailto:service@iqiyi.com.tw" target="_blank">聯絡我們</a>
 	</p>
 </div>
 <!-- 頁尾區塊 end -->

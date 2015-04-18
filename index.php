@@ -56,8 +56,8 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.php">愛奇藝臺灣官方網站</a></li>
-           <!-- <li><a href="#"></a></li>
-            <li><a href="#"></a></li>-->
+            <li><a href="https://www.facebook.com/pps.iqiyi" target="_blank">粉絲專頁</a></li>
+            <li><a href="mailto:service@iqiyi.com.tw" target="_blank">聯絡我們</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

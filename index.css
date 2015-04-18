@@ -8,11 +8,20 @@ html {
 }
 
 
+a:hover, a:active {
+    color: #0C7700;
+}
+
+a {
+    color: #2DC000;
+}
+
+
 hr {
 	border: 0;
 	height: 2px; 
-	background-color: #32D800; 
-	color: #32D800; 
+	background-color: #2DC000; 
+	color: #2DC000; 
 }
 
 .outliner {
@@ -42,7 +51,16 @@ img.logo {
 	width: 384px; 
 	height: 345px;  
 	background-color: #CCD5CB;
-	padding: 2px;  
+	padding: 2px; 
+	margin-left: 5px;  
+}
+
+.content-focus a:hover, .content-focus a:active {
+    color: #0C7700;
+}
+
+.content-focus a {
+	color: #181818; 
 }
 
 .content-focus img {
@@ -51,13 +69,15 @@ img.logo {
 }
 
 .content-focus h3 {
-	
+	margin-top: 3px; 
+	font-size: 15px; 
 }
 
-.content-focus p {
-	
+.content-focus p {	
+	font-size: 12.5px;
+	padding-left: 2px; 
+	margin-bottom: 5px;  
 }
-
 
 /* content-formal */
 
@@ -66,6 +86,14 @@ img.logo {
 	height: 165px; 
 	background-color: #CCD5CB; 	
 	padding: 2px; 
+	position: absolute; 
+}
+
+.content-formal a:hover, .content-formal a:active {
+    color: #0C7700;                                                                                                                              
+}
+.content-formal a {
+    color: #181818; 
 }
 
 .content-formal img {
@@ -74,18 +102,64 @@ img.logo {
 }
 
 .content-formal h3 {
-	
+	margin-top: 5px; 
+	font-size: 15px; 
+	margin-bottom: 5px; 	
 }
 
 .content-formal p {
-	
+	font-size: 12px; 
+	padding-left: 5px; 
+	margin-bottom: 2px; 
+}
+
+.content-recommend {
+    position: absolute; 
+    top: 81px; 
+    width: 184px;   
+    height: 345px; 
+    background-color: #CCD5CB; 
+    padding: 2px; 	
+}
+
+.content-recommend a:hover, .content-recommend a:active {
+    color: #0C7700;                                                                                                                              
+}
+
+.content-recommend a {
+    color: #181818; 
+}
+
+.content-recommend img {
+	width: 180px; 
+	height: 101px; 	
+}
+
+.content-recommend hr {
+	margin-top: 0px; 
+	margin-bottom: 10px; 	
+}
+
+.content-recommend h3 {
+	position: relative; 
+	margin-top: 5px;
+	margin-left: 5px;  
+	font-size: 16px; 	
+}
+
+.content-recommend p {
+	font-size: 14px; 
+	padding-left: 5px; 
 }
 
 /* 今日必看 */
 
 .must {
+	position: relative; 
 	width: 976px;
-	height: 410px;  	
+	height: 410px;  
+	margin-right: 10px; 
+	margin-bottom: 10px;   
 }
 
 p.must-list {
@@ -95,27 +169,29 @@ p.must-list {
 	font-size: 24px;  
 }
 
+img.must-today {
+	position: absolute;
+	top: 95px;  
+	width: 380px;
+	height: 31px; 
+}
+
 /* 精彩推薦 */
 
 .recommend {
-	width: 184px; 	
-	height: 345px; 
-	background-color: #CCD5CB; 
-	margin-left: 10px;
-	padding: 2px;  
+	position: absolute; 
+	width: 184px; 
+	top: 0px; 
+	right: 5px; 
 }
 
-.recommend img {
-	width: 180px; 
-	height: 101px; 
-}
-
-.recommend h3 {
-	
-}
-
-.recommend p {
-	
+.recommend h1 {
+	margin: 0px;  	
 }
 
 /* 小編狂推 */
+.editor {
+	position: relative; 
+	width: 1175px; 
+	height: 450px; 	
+}

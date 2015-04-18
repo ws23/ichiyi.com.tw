@@ -7,6 +7,10 @@ html {
 	background-color: #F6F6F6; 
 }
 
+h1, h3 {
+	font-weight: bold; 
+	color: #2Dc000; 	
+}
 
 a:hover, a:active {
     color: #0C7700;
@@ -49,7 +53,7 @@ img.logo {
 /* content-focus */
 .content-focus {
 	width: 384px; 
-	height: 345px;  
+	height: 350px;  
 	background-color: #CCD5CB;
 	padding: 2px; 
 	margin-left: 5px;  
@@ -70,11 +74,11 @@ img.logo {
 
 .content-focus h3 {
 	margin-top: 3px; 
-	font-size: 15px; 
+	font-size: 14px; 
 }
 
 .content-focus p {	
-	font-size: 12.5px;
+	font-size: 12px;
 	padding-left: 2px; 
 	margin-bottom: 5px;  
 }
@@ -83,7 +87,7 @@ img.logo {
 
 .content-formal {
 	width: 184px; 
-	height: 165px; 
+	height: 173px; 
 	background-color: #CCD5CB; 	
 	padding: 2px; 
 	position: absolute; 
@@ -103,7 +107,7 @@ img.logo {
 
 .content-formal h3 {
 	margin-top: 5px; 
-	font-size: 15px; 
+	font-size: 14px; 
 	margin-bottom: 5px; 	
 }
 
@@ -157,7 +161,7 @@ img.logo {
 .must {
 	position: relative; 
 	width: 976px;
-	height: 410px;  
+	height: 450px;  
 	margin-right: 10px; 
 	margin-bottom: 10px;   
 }
@@ -194,4 +198,14 @@ img.must-today {
 	position: relative; 
 	width: 1175px; 
 	height: 450px; 	
+}
+
+/* footer */
+
+.footer {
+	position: relative;
+	top: 20px;  
+	font-size: 24px; 
+	color: #C5FFB3; 
+	text-align: center; 
 }

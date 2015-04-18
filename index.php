@@ -10,13 +10,14 @@
 
     <title>愛奇藝臺灣官方網站</title>
 
+	<link href="index.css" rel="stylesheet">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<script src="jquery/jquery-1.11.2.js"></script>
 	<script src="bootstrap/js/bootstrap.js"></script>
   </head>
 
   <body>
-
+	<!-- header start-->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -30,9 +31,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+           <!-- <li class="active"><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>-->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -46,6 +47,8 @@
       </div>
 
     </div><!-- /.container -->
+
+	<!-- header end -->
 
   </body>
 </html>

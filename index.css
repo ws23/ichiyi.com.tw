@@ -15,22 +15,19 @@ hr {
 	color: #32D800; 
 }
 
+.outliner {
+	width: 1180px; 
+	position: relative; 
+	background-color: #F6F6F6; 
+	margin-top: 70px; 	
+}
+
 @media screen and (min-width: 1185px) {
 	.outliner {
-		width: 1180px; 
-		position: relative; 
 		left: 50%; 
-		margin-left: -590px; 
+		margin-left: -590px;
 	}
 }
-
-@media screen and (max-width: 1184px) {
-	.outliner {
-		width: 1180px; 
-		position: relative; 	
-	}	
-}
-
 
 /* header */
 img.logo {
@@ -44,13 +41,13 @@ img.logo {
 .content-focus {
 	width: 384px; 
 	height: 345px;  
-	background-color: #CCD5CB; 
+	background-color: #CCD5CB;
+	padding: 2px;  
 }
 
 .content-focus img {
 	width: 380px; 
 	height: 270px; 
-	margin: 2px; 
 }
 
 .content-focus h3 {
@@ -68,12 +65,12 @@ img.logo {
 	width: 184px; 
 	height: 165px; 
 	background-color: #CCD5CB; 	
+	padding: 2px; 
 }
 
 .content-formal img {
 	width: 180px; 
 	height: 101px; 
-	margin: 2px; 	
 }
 
 .content-formal h3 {
@@ -84,18 +81,33 @@ img.logo {
 	
 }
 
-/* recommend */
+/* 今日必看 */
+
+.must {
+	width: 976px;
+	height: 410px;  	
+}
+
+p.must-list {
+	position: absolute;
+	top: 8px; 	 	
+	left: 155px;
+	font-size: 24px;  
+}
+
+/* 精彩推薦 */
 
 .recommend {
 	width: 184px; 	
 	height: 345px; 
 	background-color: #CCD5CB; 
+	margin-left: 10px;
+	padding: 2px;  
 }
 
 .recommend img {
 	width: 180px; 
 	height: 101px; 
-	margin: 2px; 
 }
 
 .recommend h3 {
@@ -106,3 +118,4 @@ img.logo {
 	
 }
 
+/* 小編狂推 */

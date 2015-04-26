@@ -19,6 +19,16 @@
   
  </head>
 
+<!-- preprocess start -->
+
+<?php
+    setLog($DBmain, 'info', 'into index(mobile)', ''); 
+    $now = date('Y-m-d H:o:s', time());
+    
+    require_once('updateState.php'); 
+?>
+<!-- preprocess end -->
+
 
 <!-- header start -->
 <body role="ducument">

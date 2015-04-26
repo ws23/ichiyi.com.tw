@@ -25,7 +25,7 @@
     setLog($DBmain, 'info', 'into index(mobile)', ''); 
     $now = date('Y-m-d H:o:s', time());
     
-    require_once('updateState.php'); 
+    require_once('../updateState.php'); 
 ?>
 <!-- preprocess end -->
 

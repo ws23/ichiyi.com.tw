@@ -24,7 +24,7 @@
 <?php
     setLog($DBmain, 'info', 'into index(mobile)', ''); 
     $now = date('Y-m-d H:o:s', time());
-    
+	include_once("../analyticstracking.php");     
     require_once('../updateState.php'); 
 ?>
 <!-- preprocess end -->

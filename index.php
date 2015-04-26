@@ -28,6 +28,7 @@
 
   <body class="outliner">
 	<!-- preprocess start-->
+<?php include_once("analyticstracking.php") ?>
 	<div id="fb-root"></div>
 
 	<script>

@@ -1,10 +1,15 @@
 <?php	/* Setting */
 	// Utilities
-	$ScriptPath = "/ichiyi"
+
+	$HOST = $_SERVER['HTTP_HOST']; 
+	$URI = $_SERVER['REQUEST_URI']; 
+	$folderRoot = "/iqiyi/"; 
+	$URLPre = "http://{$HOST}{$folderRoot}"; 
+
 
 	// Database Setting (MySQL)
-	$DBHost = "127.0.0.1"; 
-	$DBUser = ""; 
-	$DBPassword = ""; 
-	$DBName = ""; 
+	$DBHost = "localhost"; 
+	$DBUser = "ichiyi"; 
+	$DBPassword = "qwerty123"; 
+	$DBName = "ichiyi_main"; 
 ?>

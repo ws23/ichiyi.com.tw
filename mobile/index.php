@@ -68,10 +68,10 @@
 		$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 1 ORDER BY `startTime` DESC LIMIT 1; "); 
 		$row = $result->fetch_array(MYSQLI_BOTH); 
 	?>
-		<img src="../<?php echo $row['imageURL']; ?>" class="img-thumbnail"/><br />
 		<a href="<?php echo $row['URL']; ?>">
-			<strong>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['titleText']; ?></strong><br />
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['contentText']; ?>
+			<img src="../<?php echo $row['imageURL']; ?>" class="img-thumbnail"/><br />
+			<strong>&nbsp;&nbsp;<?php echo $row['titleText']; ?></strong><br />
+			&nbsp;&nbsp;<?php echo $row['contentText']; ?>
 		</a>
 	</th>
 </tr>
@@ -84,12 +84,14 @@
 	?>
 <tr>
 	<td class="col-xs-2 col-sm-2">
-		<img src="../<?php echo $row['imageURL']; ?>" class="img-thumbnail"/>
+		<a href="<?php echo $row['URL']; ?>">
+			<img src="../<?php echo $row['imageURL']; ?>" class="img-thumbnail"/>
+		</a>
 	</td>
 	<td class="col-xs-3 col-sm-3">
 		<a href="<?php echo $row['URL']; ?>">
 			<strong><?php echo $row['titleText']; ?></strong><br />
-			&nbsp;<?php echo $row['contentText']; ?>
+			<?php echo $row['contentText']; ?>
 		</a>
 	</td>
 </tr>
@@ -103,17 +105,88 @@
 	<!-- 今日必看 end -->
 
 	<!-- 精彩推薦 start -->
-
+<div class="page-header">
+<a name="recommend"></a>
+<p>精彩推薦</p>
+<div class="row">
+<table class="table table-hover">
+<thead>
+<tr>
+	<th class="col-xs-1 col-sm-1">
+	<?php
+		$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 1 ORDER BY `startTime` DESC LIMIT 1; "); 
+		$row = $result->fetch_array(MYSQLI_BOTH); 
+	?>
+		<a href="<?php echo $row['URL']; ?>">
+		<img src="../<?php echo $row['imageURL']; ?>" class="img-thumbnail"/><br />
+			&nbsp;&nbsp;<?php echo $row['text']; ?>
+		</a>
+	</th>
+</tr>
+</thead>
+<tbody>
+<?php
+	$result->free(); 
+	$result = $DBmain->query("SELECT * FROM `recommend` WHERE `state` = 0 ORDER BY `startTime` DESC LIMIT 6; "); 
+	while($row = $result->fetch_array(MYSQLI_BOTH)){
+	?>
+<tr>
+	<td class="col-xs-2 col-sm-2">
+		<a href="<?php echo $row['URL']; ?>">
+			&nbsp;&nbsp;<?php echo $row['text']; ?>
+		</a>
+	</td>
+</tr>
+	<?php
+	}
+?>
+</tbody>
+</table>
+</div>
+</div>
 	<!-- 精彩推薦 end -->
 
 	<!-- 小編狂推 start -->
-
+<div class="page-header">
+<a name="editor"></a>
+<p>小編狂推</p>
+<div class="row">
+<table class="table table-hover">
+<tbody>
+<?php
+	$result->free(); 
+	$result = $DBmain->query("SELECT * FROM `editor` WHERE `state` = 0 ORDER BY `startTime` DESC LIMIT 12; "); 
+	while($row = $result->fetch_array(MYSQLI_BOTH)){
+	?>
+<tr>
+	<td class="col-xs-2 col-sm-2">
+		<a href="<?php echo $row['URL']; ?>">
+			<img src="../<?php echo $row['imageURL']; ?>" class="img-thumbnail"/>
+		</a>
+	</td>
+	<td class="col-xs-3 col-sm-3">
+		<a href="<?php echo $row['URL']; ?>">
+			<strong><?php echo $row['titleText']; ?></strong><br />
+			<?php echo $row['contentText']; ?>
+		</a>
+	</td>
+</tr>
+	<?php
+	}
+?>
+</tbody>
+</table>
+</div>
+</div>
 	<!-- 小編狂推 end -->
 </div>
 <!-- body end -->
 
 <!-- footer start -->
-
+<div class="page-header">
+<h6 class="text-center">臺灣愛奇藝股份有限公司</h6>
+<h6 class="text-center"><a href="mailto:service@iqiyi.com.tw">service@iqiyi.com.tw</a></h6>
+</div>
 <!-- footer end -->
 
 </body>

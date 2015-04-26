@@ -63,12 +63,22 @@
 <table class="table table-hover">
 <thead>
 <tr>
-	<th class="col-xs-2 col-sm-2"><img src="../img/2015-04-18-mouse.jpg" class="img-thumbnail"/></th>
-	<th class="col-xs-3 col-sm-3">我是內文我是內文我是內文我是內文我是內文我是內文我是內文我</th>
+	<th colspan="2">
+	<?php
+		$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 1 ORDER BY `startTime` DESC LIMIT 1; "); 
+		$row = $result->fetch_array(MYSQLI_BOTH); 
+	?>
+		<img src="../<?php echo $row['imageURL']; ?>" class="img-thumbnail"/><br />
+		<a href="<?php echo $row['URL']; ?>">
+			<strong>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['titleText']; ?></strong><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['contentText']; ?>
+		</a>
+	</th>
 </tr>
 </thead>
 <tbody>
 <?php
+	$result->free(); 
 	$result = $DBmain->query("SELECT * FROM `must` WHERE `state` = 0 ORDER BY `startTime` DESC LIMIT 6; "); 
 	while($row = $result->fetch_array(MYSQLI_BOTH)){
 	?>
@@ -79,13 +89,12 @@
 	<td class="col-xs-3 col-sm-3">
 		<a href="<?php echo $row['URL']; ?>">
 			<strong><?php echo $row['titleText']; ?></strong><br />
-			<?php echo $row['contentText']; ?>
+			&nbsp;<?php echo $row['contentText']; ?>
 		</a>
 	</td>
 </tr>
 	<?php
 	}
-
 ?>
 </tbody>
 </table>
@@ -100,7 +109,6 @@
 	<!-- 小編狂推 start -->
 
 	<!-- 小編狂推 end -->
-
 </div>
 <!-- body end -->
 

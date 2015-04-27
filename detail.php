@@ -5,12 +5,14 @@
 	<title>愛奇藝股份有限公司</title>
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="admin.css" />
-	<link rel="stylesheet" href="jquery/jquery-ui.css" />
-	<link rel="stylesheet" href="jquery/jquery-ui-timepicker-addon.css" />
-	<script src="jquery/jquery-1.10.2.js"></script>
-	<script src="jquery/jquery-ui.js"></script>
-	<script src="jquery/jquery-ui-sliderAccess.js"></script>
-	<script src="jquery/jquery-ui-timepicker-addon.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" href="jquery/jquery-ui-timepicker-addon.css" />
+    <script src="jquery/jquery-ui.js"></script>
+    <script src="jquery/jquery-ui-sliderAccess.js"></script>
+    <script src="jquery/jquery-ui-timepicker-addon.js"></script>
+	
 	<style>
 		img {
 			width: 180px; 

@@ -9,7 +9,7 @@
  	<script type="text/javascript" src="jquery/jquery-1.10.2.js"></script>
   	<script type="text/javascript" src="jquery/jquery-ui.js"></script>
 	<link rel="stylesheet" href="jquery/jquery-ui-timepicker-addon.css" />
-	<script src="jquery/jquery-ui.js"></script>-->
+	<script src="jquery/jquery-ui.js"></script>
 	<script src="jquery/jquery-ui-sliderAccess.js"></script>
 	<script src="jquery/jquery-ui-timepicker-addon.js"></script>
 <?php 

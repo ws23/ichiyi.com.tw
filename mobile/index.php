@@ -47,7 +47,6 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="index.php">愛奇藝臺灣官方網站</a>
 							<li><a href="#must">今日必看</a></li>
 							<li><a href="#recommend">精彩推薦</a></li>
 							<li><a href="#editor">小編狂推</a></li>

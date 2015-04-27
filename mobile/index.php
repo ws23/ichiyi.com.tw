@@ -63,6 +63,7 @@
 
 <!-- body start -->
 
+<div class="container">
 <div class="jumbotron">
 	<!-- 今日必看 start -->
 <div class="page-header">
@@ -197,6 +198,6 @@
 <h6 class="text-center"><a href="mailto:service@iqiyi.com.tw">service@iqiyi.com.tw</a></h6>
 </div>
 <!-- footer end -->
-
+</div>
 </body>
 </html>

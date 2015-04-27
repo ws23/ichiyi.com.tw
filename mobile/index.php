@@ -21,6 +21,20 @@
 
 <!-- preprocess start -->
 
+<div id="fb-root"></div>
+<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0]; 
+		if(d.getElementById(id))	
+			return; 
+		js = d.createElement(s); 
+		js.id = id; 
+		js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=748904491889773&version=v2.0"; 
+		fjs.parentNode.insertBefore(js, fjs); 
+	}(document, 'script', 'facebook-jssdk')); 
+</script>
+
+
 <?php
     setLog($DBmain, 'info', 'into index(mobile)', ''); 
     $now = date('Y-m-d H:o:s', time());
@@ -83,6 +97,7 @@
 			<strong>&nbsp;&nbsp;<?php echo $row['titleText']; ?></strong><br />
 			&nbsp;&nbsp;<?php echo $row['contentText']; ?>
 		</a>
+		<div class="emphasize-color"><?php echo getFacebookLikeFormatLink($row['URL'], "button_count"); ?></div>
 	</th>
 </tr>
 </thead>
@@ -103,6 +118,7 @@
 			<strong><?php echo $row['titleText']; ?></strong><br />
 			<?php echo $row['contentText']; ?>
 		</a>
+		<div class="emphasize-color"><?php echo getFacebookLikeFormatLink($row['URL'], "button_count"); ?></div>
 	</td>
 </tr>
 	<?php
@@ -179,6 +195,7 @@
 			<strong><?php echo $row['titleText']; ?></strong><br />
 			<?php echo $row['contentText']; ?>
 		</a>
+		<div class="empasize-color"><?php echo getFacebookLikeFormatLink($row['URL'], "button_count"); ?></div>
 	</td>
 </tr>
 	<?php

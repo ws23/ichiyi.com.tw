@@ -306,6 +306,28 @@ function checkUser($DBLink,$user_id){
         return false;
 }
 
+/* get like amount */
 
+function getFacebookLikeAmount($url){
+	$URL = "https://api.facebook.com/method/fql.query?query=select%20%20like_count%20from%20link_stat%20where%20url=%22{$url}%22"; 
+	$xml = simplexml_load_file($URL); 
+	$amount = -1; 
+	$str = ""; 
+
+	foreach($xml->children() as $child){
+		foreach($child->children() as $content)	
+			if($content->getName() == "like_count")
+				$amount = intval($content, 10); 
+	}
+	
+	$str = (string)$amount;
+	$len = strlen($str); 
+	
+	$out = ""; 
+	for($i=0;$i<11-$len;$i++)
+		$out .= "&nbsp;"; 
+
+	return $out.$str; 
+}
 
 ?>

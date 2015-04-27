@@ -64,6 +64,12 @@
         <div id="navbar" class="collapse navbar-collapse pull-right">
           <ul class="nav navbar-nav">
             <li><a href="https://www.facebook.com/pps.iqiyi" target="_blank">粉絲專頁</a></li>
+			<li>
+				<div class="fblinkamount"><img class="amount" src="img/amount.png" />
+				<?php echo getFacebookLikeAmount("http://www.facebook.com/pps.iqiyi"); ?></a>
+				</div>
+			</li>
+
             <li><a href="mailto:service@iqiyi.com.tw" target="_blank">聯絡我們</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -223,7 +229,6 @@
 		?>
 	</div>
 	<!-- 小編狂推 end -->
-
 <!-- 首頁內容 end -->
 
 <?php

@@ -12,11 +12,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/ettoday.ico" type="image/x-icon">
+    <link rel="icon" href="img/ettoday.ico" type="image/x-icon">
 	<meta name="title" content"愛奇藝臺灣官方網站">
     <meta name="description" content="">
     <meta name="author" content="臺灣愛奇藝股份有限公司">
 
-    <title>愛奇藝臺灣官方網站</title>
+    <title>ETtoday | 愛奇藝</title>
 
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="index.css" rel="stylesheet">
@@ -59,11 +61,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-		  <a class="navbar-brand" href="index.php"><img class="logo" src="img/logo.png"/></a>
+		  <a class="navbar-brand" href="index.php"><img class="logo" src="img/ettoday_iqiyi.png"/></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse pull-right">
           <ul class="nav navbar-nav">
-            <li><a href="https://www.facebook.com/pps.iqiyi" target="_blank">粉絲專頁</a></li>
+            <li><a href="https://www.facebook.com/pps.iqiyi" target="_blank">
+					粉絲團
+					<img class="header-like" src="img/fblike.png" />
+				</a>
+			</li>
 			<li>
 				<div class="fblinkamount"><img class="amount" src="img/amount.png" />
 				<?php echo getFacebookLikeAmount("http://www.facebook.com/pps.iqiyi"); ?></a>

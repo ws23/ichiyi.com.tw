@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="臺灣愛奇藝股份有限公司">
 
-  <title>ETtoday | 愛奇藝</title>
+  <title>愛奇藝 | 台灣</title>
 
   <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="index.css" rel="stylesheet">
@@ -59,7 +59,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="index.php"><img class="logo" src="../img/ettoday_iqiyi.png"/></a>
+						<a class="navbar-brand" href="index.php"><img class="logo" src="../img/logo_green.png"/></a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">

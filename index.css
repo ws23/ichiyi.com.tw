@@ -9,7 +9,7 @@ html {
 
 h1, h3 {
 	font-weight: bold; 
-	color: #2Dc000; 	
+	color: #2Dc000; 
 }
 
 a:hover, a:active {
@@ -26,6 +26,7 @@ hr {
 	height: 2px; 
 	background-color: #2DC000; 
 	color: #2DC000; 
+	margin-top: -5px; 
 }
 
 .outliner {
@@ -104,7 +105,8 @@ img.header-like {
 	height: 173px; 
 	background-color: #CCD5CB; 	
 	padding: 2px; 
-	position: absolute; 
+	position: absolute;
+	margin-top: -15px;  
 }
 
 .content-formal a:hover, .content-formal a:active {
@@ -132,9 +134,9 @@ img.header-like {
 
 .content-recommend {
     position: absolute; 
-    top: 81px; 
+    top: 87px; 
     width: 184px;   
-    height: 345px; 
+    height: 348px; 
     background-color: #CCD5CB; 
     padding: 2px; 	
 }
@@ -174,7 +176,7 @@ img.header-like {
 .must {
 	position: relative; 
 	width: 976px;
-	height: 450px;  
+	height: 415px;  
 	margin-right: 10px; 
 	margin-bottom: 10px;   
 }
@@ -198,13 +200,10 @@ img.must-today {
 .recommend {
 	position: absolute; 
 	width: 184px; 
-	top: 0px; 
+	top: -20px; 
 	right: 5px; 
 }
 
-.recommend h1 {
-	margin: 0px;  	
-}
 
 /* 小編狂推 */
 .editor {

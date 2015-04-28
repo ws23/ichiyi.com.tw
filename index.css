@@ -94,7 +94,6 @@ img.header-like {
 
 .content-focus p {	
 	font-size: 12px;
-	padding-left: 2px; 
 	margin-bottom: 5px;  
 }
 
@@ -127,8 +126,7 @@ img.header-like {
 }
 
 .content-formal p {
-	font-size: 12px; 
-	padding-left: 5px; 
+	font-size: 12px;
 	margin-bottom: 2px; 
 }
 

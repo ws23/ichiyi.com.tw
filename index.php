@@ -11,7 +11,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/iqiyi.ico" type="image/x-icon">
+    <link rel="icon" href="img/iqiyi.ico" type="image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="title" content"愛奇藝臺灣官方網站">
     <meta name="description" content="">
     <meta name="author" content="臺灣愛奇藝股份有限公司">

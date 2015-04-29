@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php require_once(dirname(__FILE__) . "/../config.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +7,12 @@
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="admin.css" />
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
-    <script type="text/javascript" src="jquery/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="jquery/jquery-ui.js"></script>
-    <link rel="stylesheet" href="jquery/jquery-ui-timepicker-addon.css" />
-    <script src="jquery/jquery-ui.js"></script>
-    <script src="jquery/jquery-ui-sliderAccess.js"></script>
-    <script src="jquery/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="<?php echo $URLPv; ?>lib/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="<?php echo $URLPv; ?>lib/jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" href="<?php echo $URLPv; ?>lib/jquery/jquery-ui-timepicker-addon.css" />
+    <script src="<?php echo $URLPv; ?>lib/jquery/jquery-ui.js"></script>
+    <script src="<?php echo $URLPv; ?>lib/jquery/jquery-ui-sliderAccess.js"></script>
+    <script src="<?php echo $URLPv; ?>lib/jquery/jquery-ui-timepicker-addon.js"></script>
 	
 	<style>
 		img {
@@ -24,7 +25,7 @@
 		}
 	</style>
 <?php
-	require_once('header.php'); 
+	require_once(dirname(__FILE__) . '/../lib/header.php'); 
 	if(!isset($_SESSION['USERNAME'])){
 		setLog($DBmain, 'warning', 'No authority', '');
 		alert('尚未登入，請登入。'); 
@@ -50,7 +51,7 @@
 	$row = $result->fetch_array(MYSQLI_BOTH); 
         if($row['state']>3){
     header("HTTP/1.1 301 Moved Permanently");
-    header("Location: index.php");
+    header("Location: {$URLPv}index.php");
             }
 ?>
 <script>
@@ -58,7 +59,7 @@
     var id="<?php echo $id;?>";
     var start_date_change='<?php echo $row['startTime'];?>';
     var end_date_change='<?php echo $row['endTime'];?>';
-    var imageURL='<?php echo $row['imageURL'];?>';
+    var imageURL='<?php echo $URLPv . $row['imageURL'];?>';
     var image_width="<?php echo getImageWidth($class,$pre);?>";
     var image_height="<?php echo getImageHeight($class,$pre);?>";
     var URL='<?php echo $row['URL'];?>';
@@ -132,7 +133,7 @@
                 success: function(msg){
                     alert(op_type+" success "+msg);
                     $('div#test').text(msg);
-            window.location.href="adminInterface.php";
+            window.location.href="index.php";
                 },
                 error:function(){
                     alert(op_type+" error");
@@ -213,7 +214,7 @@ END;
         ?>
 <?php 
 if ($class!='title'||($class=='recommend'&&$row['state']%2!=0)){
-	echo "<tr><td>圖片檔案</td><td><img src='{$row['imageURL']}'></td>";
+	echo "<tr><td>圖片檔案</td><td><img src='{$URLPv}{$row['imageURL']}'></td>";
         echo "<td><form id='SubmitImage' method='post' action='image.php' >";
         echo "<input id='fileupload' type='file' name='image' value='{$row['imageURL']}'/><input id='SubmitImageButton' type='button' onClick='SubmitImage();' value='上傳圖片' /></form></td></tr>"; 
 }
@@ -249,6 +250,6 @@ else if($class=='title')
 <!-- detail end -->
 
 <?php
-	require_once('footer.php'); 
+	require_once(dirname(__FILE__) . '/../lib/footer.php'); 
 ?>
 </html>

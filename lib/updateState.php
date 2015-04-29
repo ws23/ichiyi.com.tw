@@ -1,6 +1,6 @@
 <?php 
 	session_start(); 
-	require_once('std.php'); 
+	require_once(dirname(__FILE__) . "/std.php"); 
 	$now = date('Y-m-d H:i:s', time()); 
         $t=array("must","recommend","editor");
         

@@ -12,13 +12,4 @@
 	$logoName = "logo_green.png"; 
 	$iconName = "iqiyi.ico"; 
 
-
-	// Database Setting (MySQL)
-	$DBHost = "localhost";
-	$DBUser = "";
-	$DBPassword = "";
-	$DBName = "";
-
-	// API
-	$facebook_app_id = "936054496413817"; 
 ?>

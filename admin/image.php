@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once 'std.php';
+    require_once dirname(__FILE__) . '/../lib/std.php';
     $user_id=$_SESSION['USERNAME'];
     $file=$_FILES['image'];
     $pattern='/^.*\.(png|jpg)$/i';
@@ -141,5 +141,5 @@
         echo '上傳檔案應為圖檔';
     }
     
-    require_once('stdEnd.php');
+    require_once(dirname(__FILE__) . '/../lib/stdEnd.php');
 ?>

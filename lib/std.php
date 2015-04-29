@@ -1,11 +1,9 @@
 <?php
-	ini_set('display_errors', 'Off'); 
-
-	require_once('lib.php');
-	require_once('conf.php'); 
-        
-        $facebook_app_id="936054496413817";
-        
+	//ini_set('display_errors', 'Off'); 
+	require_once(dirname(__FILE__) . "/conf.php"); 
+	require_once(dirname(__FILE__) . "/lib.php");
+	
+       
 	$DBmain = new mysqli($DBHost, $DBUser, $DBPassword, $DBName);
 	if($DBmain->connect_error)
 		die('Connect Error ( ' . $DBmain->connect_errno . ' ) ' . $DBmain->connect_error); 

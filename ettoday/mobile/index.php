@@ -18,7 +18,7 @@
   <script src="<?php echo $URLPv; ?>lib/jquery/jquery-1.11.2.js"></script>
   <script src="<?php echo $URLPv; ?>lib/bootstrap/js/bootstrap.js"></script>
 
-  <?php require_once(dirname(__FILE__) . "/../lib/std.php"); ?> 
+  <?php require_once(dirname(__FILE__) . "/../../lib/std.php"); ?> 
   
  </head>
 
@@ -41,8 +41,8 @@
 <?php
     setLog($DBmain, 'info', 'into index(mobile)', ''); 
     $now = date('Y-m-d H:o:s', time());
-	include_once(dirname(__FILE__) . "/../analyticstracking.php");     
-    require_once(dirname(__FILE__) . '/../lib/updateState.php'); 
+	include_once(dirname(__FILE__) . "/../../analyticstracking.php");     
+    require_once(dirname(__FILE__) . '/../../lib/updateState.php'); 
 ?>
 <!-- preprocess end -->
 

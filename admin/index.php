@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php require_once(dirname(__FILE__) . "/../config.php"); ?> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,14 +7,14 @@
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="admin.css" />
  	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
- 	<script type="text/javascript" src="jquery/jquery-1.10.2.js"></script>
-  	<script type="text/javascript" src="jquery/jquery-ui.js"></script>
-	<link rel="stylesheet" href="jquery/jquery-ui-timepicker-addon.css" />
-	<script src="jquery/jquery-ui.js"></script>
-	<script src="jquery/jquery-ui-sliderAccess.js"></script>
-	<script src="jquery/jquery-ui-timepicker-addon.js"></script>
+ 	<script type="text/javascript" src="<?php echo $URLPv; ?>lib/jquery/jquery-1.10.2.js"></script>
+  	<script type="text/javascript" src="<?php echo $URLPv; ?>lib/jquery/jquery-ui.js"></script>
+	<link rel="stylesheet" href="<?php echo $URLPv; ?>lib/jquery/jquery-ui-timepicker-addon.css" />
+	<script src="<?php echo $URLPv; ?>lib/jquery/jquery-ui.js"></script>
+	<script src="<?php echo $URLPv; ?>lib/jquery/jquery-ui-sliderAccess.js"></script>
+	<script src="<?php echo $URLPv; ?>lib/jquery/jquery-ui-timepicker-addon.js"></script>
 <?php 
-	require_once('header.php'); 
+	require_once(dirname(__FILE__) . '/../lib/header.php'); 
 	if(!isset($_SESSION['USERNAME'])) {
 		alert('登入逾時，請重新登入。'); 
 		setLog($DBmain, 'warning', 'Login timeout. ', ""); 
@@ -255,7 +256,7 @@ function CoBranding(){
 <!-- Admin interface start -->
 <?php 
 	setLog($DBmain, 'info', 'into adminInterface', $_SESSION['USERNAME']);  
-	require_once('updateState.php'); 
+	require_once(dirname(__FILE__) . '/../lib/updateState.php'); 
 ?>
 <h2>嗨！<?php echo $_SESSION['NICKNAME']; ?>！歡迎回來！</h2>
 <hr />
@@ -467,4 +468,4 @@ function CoBranding(){
 </div>
 
 <!-- Admin interface end -->
-<?php require_once('footer.php'); ?>
+<?php require_once(dirname(__FILE__) . '/../lib/footer.php'); ?>

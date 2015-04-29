@@ -8,7 +8,7 @@
 
 ?>
 
-<?php require_once('conf.php');  ?>
+<?php require_once('config.php');  ?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -27,7 +27,7 @@
 	<script src="<?php echo $URLPv; ?>lib/jquery/jquery-1.11.2.js"></script>
 	<script src="<?php echo $URLPv; ?>lib/bootstrap/js/bootstrap.js"></script>
 
-	<?php require_once(dirname(__FILE__) . '/lib/std.php'); ?> 
+	<?php require_once(dirname(__FILE__) . '/../lib/std.php'); ?> 
   </head>
 
   <body class="outliner">
@@ -49,7 +49,7 @@
 	setLog($DBmain, 'info', 'into index', ''); 
 	$now = date('Y-m-d H:o:s', time());
 	
-	require_once(dirname(__FILE__) . "/lib/updateState.php"); 
+	require_once(dirname(__FILE__) . "/../lib/updateState.php"); 
 ?>
 	<!-- preprocess end -->
 
@@ -240,7 +240,7 @@
 <!-- 首頁內容 end -->
 
 <?php
-	require_once(dirname(__FILE__) . "/lib/footer.php"); 
+	require_once(dirname(__FILE__) . "/../lib/footer.php"); 
 ?>	
 </html>
 

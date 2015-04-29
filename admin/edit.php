@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'std.php';
+require_once (dirname(__FILE__) . '/../lib/std.php');
 $user_id=$_SESSION['USERNAME'];
 $table=$_POST['table'];
 $prikey=$_POST[getPriKeyFieldName($table)];
@@ -75,5 +75,5 @@ if($_POST['type']=='remove' && checkUser($DBmain,$user_id)){
     setLog($DBmain, "info","remove data (".$table.") ".getPriKeyFieldName($table)."=".$prikey,$user_id);
 }
 
-require_once('stdEnd.php');
+require_once(dirname(__FILE__) . '/../lib/stdEnd.php');
 ?>

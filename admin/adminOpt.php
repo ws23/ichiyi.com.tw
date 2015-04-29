@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require_once('std.php'); 
+	require_once(dirname(__FILE__) . '/../lib/std.php'); 
 
 	if(isset($_POST['originPW'])) { // change password
 		$password = $DBmain->real_escape_string($_POST['originPW']);
@@ -29,7 +29,7 @@
 			setLog($DBmain, 'warning', "password error", $_SESSION['USERNAME']); 
 		}
 		
-		locate('adminInterface.php'); 
+		locate('index.php'); 
 	}
 	if(isset($_POST['add-type']) && $_POST['add-type']=='must' ) { 
 		$table = 'must'; 
@@ -107,6 +107,6 @@
                 echo "INSERT INTO `{$table}` (`imageURL`, `URL`, `state`) VALUES ('{$imgURL}', '{$url}', '{$state}'); ";
 		setLog($DBmain, 'info', "insert new data ({$table})", $_SESSION['USERNAME']); 	
         }
-	require_once('stdEnd.php');
-	locate('adminInterface.php'); 
+	require_once(dirname(__FILE__) . '/../lib/stdEnd.php');
+	locate('index.php'); 
 ?>

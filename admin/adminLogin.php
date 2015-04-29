@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php require_once(dirname(__FILE__) . '/../config.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +7,9 @@
 	<meta name="title" content="愛奇藝" />
 	<link type="text/css" rel="stylesheet" href="admin.css" />
 <?php
-	require_once('header.php'); 
+	require_once(dirname(__FILE__) . '/../lib/header.php'); 
 	if(isset($_SESSION['USERNAME']))
-		locate('adminInterface.php'); 
+		locate('index.php'); 
 ?>
 
 <!-- Login start -->
@@ -27,6 +28,6 @@
 <!-- Login end -->
 
 <?php
-	require_once('footer.php'); 
+	require_once(dirname(__FILE__) . '/../lib/footer.php'); 
 ?>
 </html>

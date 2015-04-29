@@ -1,0 +1,20 @@
+
+.jumbotron {
+	background-color: #FFFFFF; 	
+}
+
+
+/* header */
+
+img.logo {
+	margin-top: -10px; 	
+	height: 40px; 
+}
+
+/* body */
+
+th.body-img {
+	height: 110px; 
+	width: 65px; 
+}
+

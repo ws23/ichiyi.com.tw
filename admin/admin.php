@@ -1,5 +1,6 @@
-<?php session_start(); 
-	require_once('std.php');
+<?php session_start();
+	require_once(dirname(__FILE__) . '/../config.php'); 
+	require_once(dirname(__FILE__) . '/../lib/std.php');
 
 	/* check login correct or not */
 	$userName = $DBmain->real_escape_string($_POST['userID']); 
@@ -24,7 +25,7 @@
 		$_SESSION['NICKNAME'] = $row['nickName']; 
 		$_SESSION['EMAIL'] = $row['email']; 
 		$_SESSION['AUTH'] = $row['authority']; 
-		locate('adminInterface.php'); 
+		locate('index.php'); 
 	}
 	else {
 		alert('使用者密碼錯誤，請重新輸入。'); 
@@ -33,5 +34,5 @@
 	}
 	
 	$result->free(); 
-	require_once('stdEnd.php'); 
+	require_once(dirname(__FILE__) . '/../lib/stdEnd.php'); 
 ?>

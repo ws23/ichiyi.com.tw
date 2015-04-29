@@ -3,13 +3,19 @@
 
 	$HOST = $_SERVER['HTTP_HOST']; 
 	$URI = $_SERVER['REQUEST_URI']; 
-	$folderRoot = "/iqiyi/"; 
-	$URLPre = "http://{$HOST}{$folderRoot}"; 
+	$folderRoot = "/"; 
+	$URLPv = "http://{$HOST}{$folderRoot}"; 
+
+
+	// Content
+	$titleName = ""; 
+	$logoName = ""; 
+	$iconName = ""; 
 
 
 	// Database Setting (MySQL)
 	$DBHost = "localhost"; 
-	$DBUser = "ichiyi"; 
-	$DBPassword = "qwerty123"; 
-	$DBName = "ichiyi_main"; 
+	$DBUser = ""; 
+	$DBPassword = ""; 
+	$DBName = ""; 
 ?>

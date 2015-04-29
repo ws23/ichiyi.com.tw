@@ -16,8 +16,7 @@
 <?php 
 	require_once(dirname(__FILE__) . '/../lib/header.php'); 
 	if(!isset($_SESSION['USERNAME'])) {
-		alert('登入逾時，請重新登入。'); 
-		setLog($DBmain, 'warning', 'Login timeout. ', ""); 
+		setLog($DBmain, 'warning', 'Login timeout or haven\'t login. ', ""); 
 		locate('adminLogin.php'); 
 	}
 

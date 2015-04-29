@@ -1,5 +1,5 @@
 <?php
-	//ini_set('display_errors', 'Off'); 
+	ini_set('display_errors', 'Off'); 
 	require_once(dirname(__FILE__) . "/conf.php"); 
 	require_once(dirname(__FILE__) . "/lib.php");
 	

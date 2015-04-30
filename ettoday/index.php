@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="<?php echo $URLPv . "img/" . $iconName; ?>" type="image/x-icon">
-    <link rel="icon" href="<?php echo $URLPv . "$img/" . $iconName; ?>" type="image/x-icon">
+    <link rel="icon" href="<?php echo $URLPv . "img/" . $iconName; ?>" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="title" content"愛奇藝臺灣官方網站">
     <meta name="description" content="">

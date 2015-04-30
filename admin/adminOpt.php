@@ -42,7 +42,7 @@
 		$now = date('Y-m-d', time()); 
 		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
 
-		move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+		move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
 			
 		$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `titleText`, `contentText`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$titleText}', '{$contentText}', '{$url}', '{$state}'); "); 
@@ -59,7 +59,7 @@
 
 		if($_POST['focus']=="true") {
 			$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
-			move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+			move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 			setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
 			$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `text`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$text}', '{$url}', '{$state}'); "); 
 		}
@@ -79,7 +79,7 @@
 		$now = date('Y-m-d', time()); 
 		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
 
-		move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+		move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
 			
 		$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `titleText`, `contentText`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$titleText}', '{$contentText}', '{$url}', '{$state}'); "); 
@@ -101,7 +101,7 @@
 		$now = date('Y-m-d', time()); 
 		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
 
-		move_uploaded_file($_FILES['img']['tmp_name'], $imgURL); 
+		move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
 		$DBmain->query("INSERT INTO `{$table}` (`imageURL`, `URL`, `state`) VALUES ('{$imgURL}', '{$url}', '{$state}'); "); 
                 echo "INSERT INTO `{$table}` (`imageURL`, `URL`, `state`) VALUES ('{$imgURL}', '{$url}', '{$state}'); ";

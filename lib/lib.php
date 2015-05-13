@@ -21,7 +21,7 @@ function getIP() {
 }
 
 /* Log, Need Database (MYSQL) */
-function setLog($DBlink, $type="info", $content, $user){
+function setLog($DBlink, $type="info", $content, $user=""){
 	$ip = getIP(); 
 	$url = $_SERVER['REQUEST_URI']; 
 	$DBlink->query("INSERT INTO `log`(`type`, `msg`, `user`, `site`, `IP`) VALUES ('{$type}', '{$content}', '{$user}', '{$url}', '{$ip}'); ");

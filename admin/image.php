@@ -18,7 +18,7 @@
     
     if(preg_match($pattern,$file_name)&&checkUser($DBmain,$user_id)){
         $now = date('Y-m-d', time());
-        $imgURL = "img/test{$now}-{$file['name']}";
+        $imgURL = "img/uploads/{$now}-{$file['name']}";
         move_uploaded_file($file['tmp_name'], $imgURL);
         $image_size=  getimagesize($imgURL);
 

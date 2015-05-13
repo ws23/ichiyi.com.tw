@@ -40,7 +40,7 @@
 		$url = $DBmain->real_escape_string($_POST['url']); 
 		$state = $_POST['focus'] == "true"? 1 : 0;
 		$now = date('Y-m-d', time()); 
-		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+		$imgURL = "img/uploads/{$now}-{$_FILES['img']['name']}"; 
 
 		move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 

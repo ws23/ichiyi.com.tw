@@ -58,7 +58,7 @@
 		$now = date('Y-m-d', time()); 
 
 		if($_POST['focus']=="true") {
-			$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+			$imgURL = "img/uploads/{$now}-{$_FILES['img']['name']}"; 
 			move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 			setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
 			$DBmain->query("INSERT INTO `{$table}` (`startTime`, `endTime`, `imageURL`, `text`, `URL`, `state`) VALUES ('{$start}', '{$end}', '{$imgURL}', '{$text}', '{$url}', '{$state}'); "); 
@@ -77,7 +77,7 @@
 		$url = $DBmain->real_escape_string($_POST['url']); 
 		$state = 0;
 		$now = date('Y-m-d', time()); 
-		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+		$imgURL = "img/uploads/{$now}-{$_FILES['img']['name']}"; 
 
 		move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 
@@ -99,7 +99,7 @@
                 $url = $DBmain->real_escape_string($_POST['url']); 
                 $state = 0;
 		$now = date('Y-m-d', time()); 
-		$imgURL = "img/{$now}-{$_FILES['img']['name']}"; 
+		$imgURL = "img/uploads/{$now}-{$_FILES['img']['name']}"; 
 
 		move_uploaded_file($_FILES['img']['tmp_name'], dirname(__FILE__) . "/../" . $imgURL); 
 		setLog($DBmain, 'info', 'upload image', $_SESSION['USERNAME']); 

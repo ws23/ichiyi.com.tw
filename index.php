@@ -23,7 +23,7 @@
     <title><?php echo $titleName; ?></title>
 
     <link href="<?php echo $URLPv; ?>lib/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<link href="index.css" rel="stylesheet">
+	<link href="<?php echo $URLPv; ?>index.css" rel="stylesheet">
 	<script src="<?php echo $URLPv; ?>lib/jquery/jquery-1.11.2.js"></script>
 	<script src="<?php echo $URLPv; ?>lib/bootstrap/js/bootstrap.js"></script>
 	<?php include_once("analyticstracking.php") ?>
